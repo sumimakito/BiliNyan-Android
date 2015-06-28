@@ -1,0 +1,15 @@
+<resources>
+
+	<style name="Base.Theme.Bilinyan.Dark" parent="Theme.AppCompat">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+
+	<style name="Theme.Bilinyan.Dark" parent="Base.Theme.Bilinyan.Dark">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+		<item name="colorPrimary">@color/pink_500</item>
+		<item name="colorPrimaryDark">@color/pink_800</item>
+	</style>
+
+</resources>

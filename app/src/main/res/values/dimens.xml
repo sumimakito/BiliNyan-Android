@@ -1,0 +1,17 @@
+<resources>
+
+	<dimen name="activity_horizontal_margin">16dp</dimen>
+	<dimen name="activity_vertical_margin">16dp</dimen>
+
+	<dimen name="toolbar_elevation">5dp</dimen>
+
+	<!-- Android Design Support Library -->
+	<dimen name="navigation_elevation">12dp</dimen>
+	<dimen name="navigation_icon_padding">32dp</dimen>
+	<dimen name="navigation_icon_size">24dp</dimen>
+	<dimen name="navigation_max_width">320dp</dimen>
+	<dimen name="navigation_padding_bottom">8dp</dimen>
+	<dimen name="navigation_padding_top_default">0dp</dimen>
+	<dimen name="navigation_separator_vertical_padding">8dp</dimen>
+
+</resources>
