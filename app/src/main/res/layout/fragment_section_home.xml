@@ -5,18 +5,23 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <moe.feng.bilinyan.view.StatusBarHeaderView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:colorNormal="@color/pink_500"
-        app:colorDarker="@color/pink_800"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:id="@+id/toolbar"
-        app:elevation="@dimen/toolbar_elevation"
-        app:popupTheme="@style/ThemeOverlay.AppCompat"/>
+	    <moe.feng.bilinyan.view.StatusBarHeaderView
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:id="@+id/status_bar_header_view"
+		    app:colorNormal="@color/toolbar_default_background_dark"
+		    app:colorDarker="@color/toolbar_default_background_dark_darker"/>
+
+	    <View
+		    android:layout_width="match_parent"
+		    android:layout_height="?attr/actionBarSize"
+	        android:background="@color/toolbar_default_background_dark"/>
+
+    </LinearLayout>
 
 </LinearLayout>

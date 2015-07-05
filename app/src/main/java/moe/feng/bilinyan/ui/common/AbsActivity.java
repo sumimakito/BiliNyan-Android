@@ -29,19 +29,23 @@ public abstract class AbsActivity extends AppCompatActivity {
 
 	protected void onCreate(Bundle savedInstanceState, boolean statusBarTranslucent) {
 		if (statusBarTranslucent) {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && !Utility.isChrome()) {
-				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-			}
-
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				getWindow().setStatusBarColor(Color.TRANSPARENT);
-			}
+			makeStatusBarTranslucent();
 		}
 
 		super.onCreate(savedInstanceState);
 	}
 
 	protected abstract void setUpViews();
+
+	public void makeStatusBarTranslucent() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && !Utility.isChrome()) {
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+		}
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			getWindow().setStatusBarColor(Color.TRANSPARENT);
+		}
+	}
 
 	@Override
 	public void setContentView(@LayoutRes int layoutResId) {

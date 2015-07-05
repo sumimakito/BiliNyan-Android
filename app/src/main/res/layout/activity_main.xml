@@ -9,6 +9,27 @@
 		android:layout_height="match_parent"
 		android:id="@+id/container"/>
 
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<moe.feng.bilinyan.view.StatusBarHeaderView
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			app:colorNormal="@android:color/transparent"
+			app:colorDarker="@android:color/transparent"/>
+
+		<android.support.v7.widget.Toolbar
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:background="@android:color/transparent"
+			android:id="@+id/toolbar"
+			app:theme="@style/ThemeOverlay.AppCompat"
+			app:popupTheme="@style/ThemeOverlay.AppCompat"/>
+
+	</LinearLayout>
+
     <moe.feng.bilinyan.view.NavigationView
         android:layout_width="@dimen/navigation_max_width"
         android:layout_height="match_parent"
@@ -17,7 +38,7 @@
         android:background="@color/navigation_background_dark"
         app:headerLayout="@layout/main_navigation_header"
         app:menu="@menu/navigation_main"
-        app:itemTextColor="@color/navigation_view_item_color"
-        app:itemIconTint="@color/navigation_view_item_color"/>
+        app:itemTextColor="@color/navigation_view_item_text_color"
+        app:itemIconTint="@color/navigation_view_item_icon_color"/>
 
 </android.support.v4.widget.DrawerLayout>

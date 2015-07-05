@@ -5,6 +5,16 @@
 
 	<dimen name="toolbar_elevation">5dp</dimen>
 
+	<dimen name="navigation_header_height">180dp</dimen>
+	<dimen name="navigation_avatar_size">64dp</dimen>
+	<dimen name="navigation_avatar_margin">16dp</dimen>
+	<dimen name="navigation_subtitle_height">56dp</dimen>
+	<dimen name="navigation_subtitle_primary_text_size">16sp</dimen>
+	<dimen name="navigation_subtitle_secondary_text_size">14sp</dimen>
+	<dimen name="navigation_subtitle_text_padding_vertical">8dp</dimen>
+	<dimen name="navigation_subtitle_text_padding_vertical_smaller">4dp</dimen>
+	<dimen name="navigation_subtitle_text_padding_horizontal">16dp</dimen>
+
 	<!-- Android Design Support Library -->
 	<dimen name="navigation_elevation">12dp</dimen>
 	<dimen name="navigation_icon_padding">32dp</dimen>

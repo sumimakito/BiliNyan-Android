@@ -1,6 +1,18 @@
 <resources>
+
 	<string name="app_name">BiliNyan</string>
 
-	<string name="hello_world">Hello world!</string>
 	<string name="action_settings">Settings</string>
+
+	<!-- Navigation Items -->
+	<string name="item_home">Home</string>
+	<string name="item_following">Following</string>
+	<string name="item_discover">Discover</string>
+	<string name="item_downloaded">Downloaded videos</string>
+
+	<string name="sub_account">Account</string>
+	<string name="item_favourite">My favourites</string>
+	<string name="item_history">History</string>
+	<string name="item_settings">Settings</string>
+
 </resources>

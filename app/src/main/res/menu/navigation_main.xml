@@ -3,18 +3,33 @@
 
 	<group android:checkableBehavior="single">
 
-		<item android:id="@+id/item_home" android:title="Home" android:checked="true"/>
-		<item android:id="@+id/item_following" android:title="Following"/>
-		<item android:id="@+id/item_discover" android:title="Discover"/>
-		<item android:id="@+id/item_games" android:title="Games"/>
+		<item android:id="@+id/item_home"
+		      android:title="@string/item_home"
+		      android:icon="@drawable/ic_home_white_24dp"
+		      android:checked="true"/>
+		<item android:id="@+id/item_following"
+		      android:title="@string/item_following"
+			  android:icon="@drawable/ic_group_work_white_24dp"/>
+		<item android:id="@+id/item_discover"
+		      android:title="@string/item_discover"
+			  android:icon="@drawable/ic_explore_white_24dp"/>
+		<item android:id="@+id/item_download"
+		      android:title="@string/item_downloaded"
+			  android:icon="@drawable/ic_file_download_white_24dp"/>
 
 	</group>
 
-	<item android:title="ACCOUNT">
+	<item android:title="@string/sub_account">
 		<menu>
-			<item android:id="@+id/item_favourite" android:title="Favourite"/>
-			<item android:id="@+id/item_history" android:title="History"/>
-			<item android:id="@+id/item_download" android:title="Download Manager"/>
+			<item android:id="@+id/item_favourite"
+			      android:title="@string/item_favourite"
+				  android:icon="@drawable/ic_star_outline_white_24dp"/>
+			<item android:id="@+id/item_history"
+			      android:title="@string/item_history"
+				  android:icon="@drawable/ic_history_white_24dp"/>
+			<item android:id="@+id/item_settings"
+			      android:title="@string/item_settings"
+				  android:icon="@drawable/ic_settings_white_24dp"/>
 		</menu>
 	</item>
 

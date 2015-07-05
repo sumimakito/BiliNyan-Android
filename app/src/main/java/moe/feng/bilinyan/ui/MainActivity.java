@@ -49,16 +49,12 @@ public class MainActivity extends AbsActivity implements NavigationView.OnNaviga
 		mDrawerLayout.setDrawerListener(new DrawerListener());
 
 		mNavigationView.setNavigationItemSelectedListener(this);
-	}
 
-	public void bindToolbar(Toolbar toolbar) {
-		setSupportActionBar(toolbar);
-		mActionBar = getSupportActionBar();
 		mActionBar.setDisplayHomeAsUpEnabled(true);
 
 		mDrawerToggle = new ActionBarDrawerToggle(this,
 				mDrawerLayout,
-				toolbar,
+				mToolbar,
 				R.string.abc_action_bar_home_description,
 				R.string.abc_action_bar_home_description
 		);
@@ -96,7 +92,6 @@ public class MainActivity extends AbsActivity implements NavigationView.OnNaviga
 	@Override
 	public boolean onNavigationItemSelected(MenuItem item) {
 		mDrawerLayout.closeDrawer(GravityCompat.START);
-		Log.i(TAG, "onNavigationItemSelected");
 		switch (item.getItemId()) {
 			case R.id.item_home:
 				setShowingFragment(fragments[0]);
@@ -110,13 +105,11 @@ public class MainActivity extends AbsActivity implements NavigationView.OnNaviga
 				setShowingFragment(fragments[2]);
 				item.setChecked(true);
 				return true;
-			case R.id.item_games:
+			case R.id.item_download:
 				setShowingFragment(fragments[3]);
 				item.setChecked(true);
 				return true;
 			case R.id.item_favourite:
-				return true;
-			case R.id.item_download:
 				return true;
 			case R.id.item_history:
 				return true;

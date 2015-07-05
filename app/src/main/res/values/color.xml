@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="toolbar_default_background_dark">#212121</color>
+	<color name="toolbar_default_background_dark_darker">#1A1A1A</color>
+
 	<color name="purple_300">#BA68C8</color>
 	<color name="deep_purple_500">#673AB7</color>
 
@@ -16,6 +19,11 @@
 	<color name="brown_500">#795548</color>
 
 	<color name="navigation_background_dark">#424242</color>
-	<color name="navigation_item_text_color">#E7E7E7</color>
+	<color name="navigation_item_text_color_normal">#E7E7E7</color>
+	<color name="navigation_item_text_color_highlight">#FFFFFF</color>
+	<color name="navigation_item_icon_color_normal">#AEAEAE</color>
+	<color name="navigation_item_icon_color_highlight">#FFFFFF</color>
+	<color name="navigation_subtitle_primary_text">#FFFFFFFF</color>
+	<color name="navigation_subtitle_secondary_text">#BFFFFFFF</color>
 
 </resources>

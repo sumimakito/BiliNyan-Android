@@ -1,8 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="180dp"
-              android:background="@color/pink_500">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/navigation_header_height">
 
-</LinearLayout>
+	<ImageView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/background_image_view"
+		android:src="@color/pink_500"
+		android:tint="#4F000000"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<moe.feng.bilinyan.view.StatusBarHeaderView
+			android:layout_width="match_parent"
+			android:layout_height="0dp"/>
+
+		<moe.feng.bilinyan.view.CircleImageView
+			android:layout_width="@dimen/navigation_avatar_size"
+			android:layout_height="@dimen/navigation_avatar_size"
+			android:layout_margin="@dimen/navigation_avatar_margin"
+			android:id="@+id/user_avatar_view"
+			android:src="@drawable/avatar_miyauchi_renge"
+			android:layout_gravity="start|top"
+			app:border_width="1dp"
+			app:border_color="@android:color/white"/>
+
+	</LinearLayout>
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:minHeight="@dimen/navigation_subtitle_height"
+		android:id="@+id/subtitle_layout"
+		android:orientation="horizontal"
+		android:clickable="true"
+		android:background="?attr/selectableItemBackground">
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:gravity="start|center_vertical"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingTop="@dimen/navigation_subtitle_text_padding_vertical"
+				android:paddingBottom="@dimen/navigation_subtitle_text_padding_vertical_smaller"
+				android:paddingStart="@dimen/navigation_subtitle_text_padding_horizontal"
+				android:paddingEnd="@dimen/navigation_subtitle_text_padding_horizontal"
+				android:id="@+id/user_name"
+				android:textSize="@dimen/navigation_subtitle_primary_text_size"
+				android:text="Miyauchi Renge"
+				android:textColor="@color/navigation_subtitle_primary_text"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingBottom="@dimen/navigation_subtitle_text_padding_vertical"
+				android:paddingStart="@dimen/navigation_subtitle_text_padding_horizontal"
+				android:paddingEnd="@dimen/navigation_subtitle_text_padding_horizontal"
+				android:id="@+id/user_other_info"
+				android:textSize="@dimen/navigation_subtitle_secondary_text_size"
+				android:text="zijin\@feng.moe"
+				android:textColor="@color/navigation_subtitle_secondary_text"/>
+
+		</LinearLayout>
+
+		<ImageView
+			android:layout_width="64dp"
+			android:layout_height="match_parent"
+			android:src="@drawable/abc_spinner_mtrl_am_alpha"
+			android:scaleType="center"/>
+
+	</LinearLayout>
+	
+</FrameLayout>

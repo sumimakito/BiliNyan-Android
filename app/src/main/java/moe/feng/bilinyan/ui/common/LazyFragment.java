@@ -5,21 +5,34 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import moe.feng.bilinyan.R;
+import moe.feng.bilinyan.view.StatusBarHeaderView;
+
 public abstract class LazyFragment extends Fragment {
 
 	private View parentView;
-	private Activity activity;
+	private AppCompatActivity activity;
+
+	private StatusBarHeaderView mStatusBarHeaderView;
 
 	public abstract @LayoutRes int getLayoutResId();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
 		parentView = inflater.inflate(getLayoutResId(), container, false);
-		activity = getActivity();
+		activity = getSupportActivity();
+		try {
+			mStatusBarHeaderView = $(R.id.status_bar_header_view);
+		} catch (Exception e) {
+
+		}
 		finishCreateView(state);
 		return parentView;
 	}
@@ -27,15 +40,31 @@ public abstract class LazyFragment extends Fragment {
 	public abstract void finishCreateView(Bundle state);
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		if (mStatusBarHeaderView != null) {
+			mStatusBarHeaderView.invalidate();
+		}
+	}
+
+	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		this.activity = activity;
+		this.activity = (AppCompatActivity) activity;
 	}
 
 	@Override
 	public void onDetach() {
 		super.onDetach();
 		this.activity = null;
+	}
+
+	public AppCompatActivity getSupportActivity() {
+		return (AppCompatActivity) super.getActivity();
+	}
+
+	public ActionBar getSupportActionBar() {
+		return getSupportActivity().getSupportActionBar();
 	}
 
 	public Context getApplicationContext() {
