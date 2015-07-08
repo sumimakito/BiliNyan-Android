@@ -50,6 +50,13 @@ public class Utility {
 		}
 	}
 
+	public static int getScreenHeight(Context context) {
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		DisplayMetrics dm = new DisplayMetrics();
+		wm.getDefaultDisplay().getMetrics(dm);
+		return dm.heightPixels;
+	}
+
 	public static int getTrueScreenHeight(Context context) {
 		int dpi = 0;
 		Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
@@ -72,11 +79,7 @@ public class Utility {
 	}
 
 	public static int getNavigationBarHeight(Context context) {
-		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-		DisplayMetrics dm = new DisplayMetrics();
-		wm.getDefaultDisplay().getMetrics(dm);
-
-		return getTrueScreenHeight(context) - dm.heightPixels;
+		return getTrueScreenHeight(context) - getScreenHeight(context);
 	}
 
 }
