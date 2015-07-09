@@ -8,6 +8,7 @@ import android.support.v13.app.FragmentPagerAdapter;
 import moe.feng.bilinyan.R;
 import moe.feng.bilinyan.ui.fragment.home.BaseHomeFragment;
 import moe.feng.bilinyan.ui.fragment.home.PlaceholderFragment;
+import moe.feng.bilinyan.ui.fragment.home.RecommendFragment;
 
 public class HomePagerAdapter extends FragmentPagerAdapter {
 
@@ -27,7 +28,7 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
 		if (fragments[position] == null) {
 			switch (position) {
 				case 0:
-					fragments[position] = PlaceholderFragment.newInstance(minimumY);
+					fragments[position] = RecommendFragment.newInstance(minimumY);
 					break;
 				default:
 					fragments[position] = PlaceholderFragment.newInstance(minimumY);

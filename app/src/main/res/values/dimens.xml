@@ -10,6 +10,12 @@
 
 	<dimen name="circle_indicator_default_height">20dp</dimen>
 
+	<dimen name="touch_raise">6dp</dimen>
+	<dimen name="card_margin">5dp</dimen>
+	<dimen name="card_elevation">4dp</dimen>
+	<dimen name="card_corner_radius">2dp</dimen>
+	<dimen name="card_title_margin">10dp</dimen>
+
 	<dimen name="navigation_header_height">180dp</dimen>
 	<dimen name="navigation_avatar_size">64dp</dimen>
 	<dimen name="navigation_avatar_margin">16dp</dimen>

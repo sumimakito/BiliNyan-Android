@@ -1,6 +1,7 @@
 package moe.feng.bilinyan.ui.common;
 
 import android.content.Context;
+import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -97,6 +98,10 @@ public abstract class AbsRecyclerViewAdapter extends RecyclerView.Adapter<AbsRec
 
 		public View getParentView() {
 			return parentView;
+		}
+
+		public <T extends View> T $(@IdRes int id) {
+			return (T) parentView.findViewById(id);
 		}
 
 	}

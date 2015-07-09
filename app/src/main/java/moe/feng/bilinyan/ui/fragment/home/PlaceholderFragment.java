@@ -1,5 +1,6 @@
 package moe.feng.bilinyan.ui.fragment.home;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
 
@@ -7,6 +8,7 @@ import moe.feng.bilinyan.R;
 import moe.feng.bilinyan.ui.fragment.SectionHomeFragment;
 import moe.feng.bilinyan.view.ObservableScrollView;
 
+@SuppressLint("ValidFragment")
 public class PlaceholderFragment extends BaseHomeFragment {
 
 	private ObservableScrollView mScrollView;
@@ -40,7 +42,6 @@ public class PlaceholderFragment extends BaseHomeFragment {
 		});
 		mScrollView.scrollTo(mScrollView.getScrollX(), getMinimumScrollY());
 	}
-
 
 	@Override
 	public void onMinimumScrollYSet(int y) {
