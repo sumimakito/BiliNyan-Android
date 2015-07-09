@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.github.ksoichiro.android.observablescrollview.TouchInterceptionFrameLayout
-			xmlns:android="http://schemas.android.com/apk/res/android"
-			xmlns:app="http://schemas.android.com/apk/res-auto"
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:id="@+id/container">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/container">
 
 	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:id="@+id/pager_wrapper"
-		android:paddingTop="@dimen/appbar_parallax_max_height">
+		android:id="@+id/pager_wrapper">
 
 		<android.support.v4.view.ViewPager
 			android:layout_width="match_parent"
@@ -21,70 +19,65 @@
 
 	<FrameLayout
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/appbar_layout">
+		android:layout_height="@dimen/appbar_parallax_max_height"
+		android:id="@+id/appbar_layout"
+		android:background="@color/toolbar_default_background_dark">
 
-		<FrameLayout
+		<android.support.v4.view.ViewPager
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+			android:layout_height="match_parent"
+			android:id="@+id/banner_pager"/>
 
-			<android.support.v4.view.ViewPager
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="128dp"
+			android:layout_gravity="top"
+			android:background="@drawable/shadow_gradient"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="84dp"
+			android:layout_gravity="bottom"
+			android:background="@drawable/shadow_gradient_reserve"/>
+
+		<moe.feng.bilinyan.view.CircleIndicator
+			android:layout_width="wrap_content"
+			android:layout_height="@dimen/circle_indicator_default_height"
+			android:layout_gravity="bottom"
+			android:layout_marginStart="64dp"
+			android:layout_marginBottom="@dimen/appbar_tab_height"
+			android:id="@+id/pager_indicator"/>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/appbar_background"
+			android:alpha="0"
+			android:orientation="vertical">
+
+			<moe.feng.bilinyan.view.StatusBarHeaderView
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:id="@+id/status_bar_header_view"
+				app:colorNormal="@color/toolbar_default_background_dark"
+				app:colorDarker="@color/toolbar_default_background_dark_darker"/>
+
+			<View
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/appbar_parallax_max_height"
-				android:id="@+id/banner_pager"/>
+				android:background="@color/toolbar_default_background_dark"/>
 
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="128dp"
-				android:layout_gravity="top"
-				android:background="@drawable/shadow_gradient"/>
+		</LinearLayout>
 
-			<View
-				android:layout_width="match_parent"
-				android:layout_height="84dp"
-				android:layout_gravity="bottom"
-				android:background="@drawable/shadow_gradient_reserve"/>
-
-			<moe.feng.bilinyan.view.CircleIndicator
-				android:layout_width="wrap_content"
-				android:layout_height="@dimen/circle_indicator_default_height"
-				android:layout_gravity="bottom"
-				android:layout_marginStart="64dp"
-				android:layout_marginBottom="@dimen/appbar_tab_height"
-				android:id="@+id/pager_indicator"/>
-
-			<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:id="@+id/appbar_background"
-				android:alpha="0"
-				android:orientation="vertical">
-
-				<moe.feng.bilinyan.view.StatusBarHeaderView
-					android:layout_width="match_parent"
-					android:layout_height="0dp"
-					android:id="@+id/status_bar_header_view"
-					app:colorNormal="@color/toolbar_default_background_dark"
-					app:colorDarker="@color/toolbar_default_background_dark_darker"/>
-
-				<View
-					android:layout_width="match_parent"
-					android:layout_height="@dimen/appbar_parallax_max_height"
-					android:background="@color/toolbar_default_background_dark"/>
-
-			</LinearLayout>
-
-			<moe.feng.bilinyan.view.SlidingTabLayout
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/appbar_tab_height"
-				android:layout_gravity="bottom"
-				android:id="@+id/sliding_tabs"
-				android:background="@android:color/transparent"
-				app:paddingStart="16dp"
-				app:paddingEnd="16dp"/>
-
-		</FrameLayout>
+		<moe.feng.bilinyan.view.SlidingTabLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/appbar_tab_height"
+			android:layout_gravity="bottom"
+			android:id="@+id/sliding_tabs"
+			android:background="@android:color/transparent"
+			app:paddingStart="16dp"
+			app:paddingEnd="16dp"/>
 
 	</FrameLayout>
 
-</com.github.ksoichiro.android.observablescrollview.TouchInterceptionFrameLayout>
+</FrameLayout>

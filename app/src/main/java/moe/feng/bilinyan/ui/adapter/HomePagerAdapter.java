@@ -6,17 +6,20 @@ import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
 
 import moe.feng.bilinyan.R;
+import moe.feng.bilinyan.ui.fragment.home.BaseHomeFragment;
 import moe.feng.bilinyan.ui.fragment.home.PlaceholderFragment;
 
 public class HomePagerAdapter extends FragmentPagerAdapter {
 
 	private final String[] TITLES;
-	private Fragment[] fragments;
+	private BaseHomeFragment[] fragments;
+
+	int minimumY = 0;
 
 	public HomePagerAdapter(FragmentManager fm, Context context) {
 		super(fm);
 		TITLES = context.getResources().getStringArray(R.array.sections);
-		fragments = new Fragment[TITLES.length];
+		fragments = new BaseHomeFragment[TITLES.length];
 	}
 
 	@Override
@@ -24,10 +27,10 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
 		if (fragments[position] == null) {
 			switch (position) {
 				case 0:
-					fragments[position] = new PlaceholderFragment();
+					fragments[position] = PlaceholderFragment.newInstance(minimumY);
 					break;
 				default:
-					fragments[position] = new PlaceholderFragment();
+					fragments[position] = PlaceholderFragment.newInstance(minimumY);
 			}
 		}
 		return fragments[position];
@@ -41,6 +44,15 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public CharSequence getPageTitle(int position) {
 		return TITLES[position];
+	}
+
+	public void setMinimumScrollY(int y) {
+		this.minimumY = y;
+		for (BaseHomeFragment fragment : fragments) {
+			if (fragment != null) {
+				fragment.setMinimumScrollY(y);
+			}
+		}
 	}
 
 }
