@@ -17,8 +17,14 @@ public abstract class BaseHomeFragment extends LazyFragment {
 
 	public abstract void onMinimumScrollYSet(int y);
 
+	public abstract void scrollToTop();
+
+	public abstract void scrollToMinimumY();
+
 	public int getMinimumScrollY() {
 		return this.minimumScrollY;
 	}
+
+	public abstract int getNowScrollY();
 
 }

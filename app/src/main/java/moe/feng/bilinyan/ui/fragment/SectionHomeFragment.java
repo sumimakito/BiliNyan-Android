@@ -26,6 +26,7 @@ public class SectionHomeFragment extends LazyFragment {
 	private View mAppBarLayout, mAppBarBackground;
 
 	private int APP_BAR_HEIGHT, TOOLBAR_HEIGHT, STATUS_BAR_HEIGHT = 0;
+	private int minHeight = 0;
 
 	@Override
 	public int getLayoutResId() {
@@ -39,6 +40,7 @@ public class SectionHomeFragment extends LazyFragment {
 		if (Build.VERSION.SDK_INT >= 19) {
 			STATUS_BAR_HEIGHT = Utility.getStatusBarHeight(getApplicationContext());
 		}
+		minHeight = APP_BAR_HEIGHT - TOOLBAR_HEIGHT * 2 - STATUS_BAR_HEIGHT;
 
 		mBannerPager = $(R.id.banner_pager);
 		mTabPager = $(R.id.tab_pager);
@@ -59,16 +61,29 @@ public class SectionHomeFragment extends LazyFragment {
 		mSlidingTab.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
 		mSlidingTab.setSelectedIndicatorColors(getResources().getColor(android.R.color.white));
 		mSlidingTab.setDistributeEvenly(true);
+		mSlidingTab.setOnTabItemClickListener(new SlidingTabLayout.OnTabItemClickListener() {
+			@Override
+			public void onTabItemClick(int pos) {
+				if (mHomeAdapter.getScrollY(pos) > minHeight) {
+					mHomeAdapter.scrollToMinimumY(pos);
+				} else {
+					mHomeAdapter.scrollToTop(pos);
+				}
+			}
+		});
 	}
 
 	public void onScrollChanged(int x, int y, int oldx, int oldy) {
-		int minHeight = APP_BAR_HEIGHT - TOOLBAR_HEIGHT - mSlidingTab.getHeight() - STATUS_BAR_HEIGHT;
-		int target = Math.min(minHeight, y);
+		setViewsTranslation(Math.min(minHeight, y));
+	}
 
+	private void setViewsTranslation(int target) {
 		mAppBarLayout.setTranslationY(-target);
 		mAppBarBackground.setTranslationY(target);
 		float alpha = Math.min(1, -mAppBarLayout.getTranslationY() / (float) minHeight);
 		mAppBarBackground.setAlpha(alpha);
+
+		mBannerAdapter.setBannerImageTransitionY(target / 2);
 
 		mHomeAdapter.setMinimumScrollY(target);
 	}

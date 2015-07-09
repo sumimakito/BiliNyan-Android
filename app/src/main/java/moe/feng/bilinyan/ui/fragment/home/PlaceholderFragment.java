@@ -44,9 +44,24 @@ public class PlaceholderFragment extends BaseHomeFragment {
 
 	@Override
 	public void onMinimumScrollYSet(int y) {
-		if (mScrollView.getScrollY() <= y) {
+		if (mScrollView != null && mScrollView.getScrollY() <= y) {
 			mScrollView.scrollTo(mScrollView.getScrollX(), y);
 		}
+	}
+
+	@Override
+	public void scrollToTop() {
+		mScrollView.smoothScrollTo(mScrollView.getScrollX(), 0);
+	}
+
+	@Override
+	public void scrollToMinimumY() {
+		mScrollView.smoothScrollTo(mScrollView.getScrollX(), getMinimumScrollY());
+	}
+
+	@Override
+	public int getNowScrollY() {
+		return mScrollView != null ? mScrollView.getScrollY() : 0;
 	}
 
 }

@@ -55,4 +55,20 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
 		}
 	}
 
+	public int getScrollY(int pos) {
+		return fragments[pos] != null ? fragments[pos].getNowScrollY() : 0;
+	}
+
+	public void scrollToTop(int pos) {
+		if (fragments[pos] != null) {
+			fragments[pos].scrollToTop();
+		}
+	}
+
+	public void scrollToMinimumY(int pos) {
+		if (fragments[pos] != null) {
+			fragments[pos].scrollToMinimumY();
+		}
+	}
+
 }

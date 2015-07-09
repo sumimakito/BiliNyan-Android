@@ -51,6 +51,10 @@ public class MainActivity extends AbsActivity implements NavigationView.OnNaviga
 		mNavigationView.setNavigationItemSelectedListener(this);
 
 		mActionBar.setDisplayHomeAsUpEnabled(true);
+		mActionBar.setDisplayUseLogoEnabled(true);
+		mActionBar.setDisplayShowTitleEnabled(false);
+
+		mActionBar.setLogo(R.drawable.ic_bili_logo_white);
 
 		mDrawerToggle = new ActionBarDrawerToggle(this,
 				mDrawerLayout,

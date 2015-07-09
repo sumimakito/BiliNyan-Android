@@ -70,7 +70,7 @@ public class HomeBannerFragment extends LazyFragment {
 	}
 
 	public void setImageTransitionY(float y) {
-		$(R.id.banner_layout).setTranslationY(y);
+		mImageView.setTranslationY(y);
 	}
 
 }
