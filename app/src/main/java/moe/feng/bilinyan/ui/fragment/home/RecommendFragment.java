@@ -1,11 +1,11 @@
 package moe.feng.bilinyan.ui.fragment.home;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -18,24 +18,18 @@ import moe.feng.bilinyan.api.RecommendApi;
 import moe.feng.bilinyan.model.BasicMessage;
 import moe.feng.bilinyan.model.RecommendList;
 import moe.feng.bilinyan.model.VideoItemInfo;
-import moe.feng.bilinyan.ui.fragment.SectionHomeFragment;
 import moe.feng.bilinyan.util.AsyncTask;
-import moe.feng.bilinyan.view.ObservableScrollView;
 
 @SuppressLint("ValidFragment")
 public class RecommendFragment extends BaseHomeFragment {
 
-	private ObservableScrollView mScrollView;
+	private ScrollView mScrollView;
 
 	private List<FrameLayout> cards;
 
-	public static RecommendFragment newInstance(int minimumY) {
-		RecommendFragment fragment = new RecommendFragment(minimumY);
+	public static RecommendFragment newInstance() {
+		RecommendFragment fragment = new RecommendFragment();
 		return fragment;
-	}
-
-	private RecommendFragment(int y) {
-		super(y);
 	}
 
 	@Override
@@ -55,40 +49,12 @@ public class RecommendFragment extends BaseHomeFragment {
 		cards.add((FrameLayout) $(R.id.card_frame_4));
 		cards.add((FrameLayout) $(R.id.card_frame_5));
 
-		mScrollView.addOnScrollChangeListener(new ObservableScrollView.OnScrollChangeListener() {
-			@Override
-			public void onScrollChanged(ObservableScrollView view, int x, int y, int oldx, int oldy) {
-				Fragment fragment = getParentFragment();
-				if (fragment != null && fragment instanceof SectionHomeFragment) {
-					((SectionHomeFragment) fragment).onScrollChanged(x, y, oldx, oldy);
-				}
-			}
-		});
-		mScrollView.scrollTo(mScrollView.getScrollX(), getMinimumScrollY());
-
 		new GetRecommendTask().execute();
-	}
-
-	@Override
-	public void onMinimumScrollYSet(int y) {
-		if (mScrollView != null && mScrollView.getScrollY() <= y) {
-			mScrollView.scrollTo(mScrollView.getScrollX(), y);
-		}
 	}
 
 	@Override
 	public void scrollToTop() {
 		mScrollView.smoothScrollTo(mScrollView.getScrollX(), 0);
-	}
-
-	@Override
-	public void scrollToMinimumY() {
-		mScrollView.smoothScrollTo(mScrollView.getScrollX(), getMinimumScrollY());
-	}
-
-	@Override
-	public int getNowScrollY() {
-		return mScrollView != null ? mScrollView.getScrollY() : 0;
 	}
 
 	private class GetRecommendTask extends AsyncTask<Void, Void, BasicMessage<RecommendList>> {

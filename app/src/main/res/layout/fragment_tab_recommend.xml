@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<moe.feng.bilinyan.view.ObservableScrollView
+<ScrollView
 	xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:paddingTop="@dimen/appbar_parallax_max_height"
 	android:clipToPadding="false"
 	android:id="@+id/scrollable">
 
@@ -96,4 +95,4 @@
 
 	</LinearLayout>
 
-</moe.feng.bilinyan.view.ObservableScrollView>
+</ScrollView>
