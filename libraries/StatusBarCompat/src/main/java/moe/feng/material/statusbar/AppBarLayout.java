@@ -41,7 +41,6 @@ public class AppBarLayout extends LinearLayout {
 		}
 		enableMode = a.getInt(R.styleable.StatusBarHeaderView_enableMode, MODE_ALL);
 		headerView = new StatusBarHeaderView(context, colorNormal, colorDark, enableMode);
-		this.setBackgroundColorWithoutAlpha(colorNormal);
 		this.setOrientation(LinearLayout.VERTICAL);
 		this.addView(headerView);
 		a.recycle();
@@ -49,6 +48,12 @@ public class AppBarLayout extends LinearLayout {
 		TypedArray a1 = context.obtainStyledAttributes(attrs, R.styleable.AppBarLayout, defStyle,
 				R.style.Widget_FengMoe_AppBarLayout);
 		this.setEnableElevation(a1.getBoolean(R.styleable.AppBarLayout_enableElevation, true));
+	}
+
+	@Override
+	public void invalidate() {
+		super.invalidate();
+		headerView.invalidate();
 	}
 
 	public void setNormalColor(@ColorInt int colorNormal) {
@@ -113,7 +118,10 @@ public class AppBarLayout extends LinearLayout {
 	public void setEnableElevation(boolean enableElevation, float dp) {
 		this.enableElevation = enableElevation;
 		if (enableElevation && Build.VERSION.SDK_INT >= 21) {
+			this.setBackgroundColorWithoutAlpha(colorNormal);
 			this.setElevation(ViewHelper.dpToPx(getContext(), dp));
+		} else {
+			this.setBackgroundColor(colorNormal);
 		}
 	}
 

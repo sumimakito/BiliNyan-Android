@@ -1,5 +1,6 @@
 package moe.feng.bilinyan.model;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -35,6 +36,14 @@ public class VideoItemInfo {
 		public String msg; /*推荐信息*/
 		public String face; /*推荐人头像地址*/
 		
+	}
+
+	public String toJsonString() {
+		return new Gson().toJson(this);
+	}
+
+	public static VideoItemInfo createFromJson(String jsonStr) {
+		return new Gson().fromJson(jsonStr, VideoItemInfo.class);
 	}
 
 }

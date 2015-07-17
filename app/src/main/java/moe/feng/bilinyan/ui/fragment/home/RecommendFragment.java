@@ -3,6 +3,7 @@ package moe.feng.bilinyan.ui.fragment.home;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -18,6 +19,7 @@ import moe.feng.bilinyan.api.RecommendApi;
 import moe.feng.bilinyan.model.BasicMessage;
 import moe.feng.bilinyan.model.RecommendList;
 import moe.feng.bilinyan.model.VideoItemInfo;
+import moe.feng.bilinyan.ui.VideoViewActivity;
 import moe.feng.bilinyan.util.AsyncTask;
 
 @SuppressLint("ValidFragment")
@@ -89,6 +91,17 @@ public class RecommendFragment extends BaseHomeFragment {
 		Picasso.with(getApplicationContext())
 				.load(info.pic)
 				.into((ImageView) view.findViewById(R.id.video_preview));
+
+		view.setTag(info);
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (view.getTag() instanceof VideoItemInfo) {
+					VideoItemInfo info = (VideoItemInfo) view.getTag();
+					VideoViewActivity.launch(getSupportActivity(), info);
+				}
+			}
+		});
 
 		return view;
 	}

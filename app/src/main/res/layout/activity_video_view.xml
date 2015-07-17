@@ -1,7 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
-</LinearLayout>
+	<moe.feng.bilinyan.view.ObservableScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:paddingTop="@dimen/appbar_parallax_max_height"
+		android:clipToPadding="false"
+		android:id="@+id/scroll_view">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Test!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
+			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
+			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
+			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
+			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
+			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
+			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!"/>
+
+		</LinearLayout>
+
+	</moe.feng.bilinyan.view.ObservableScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/appbar_parallax_max_height"
+	    android:id="@+id/appbar_container">
+
+	    <ImageView
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:id="@+id/video_preview"
+		    android:scaleType="centerCrop"/>
+
+	    <View
+		    android:layout_width="match_parent"
+		    android:layout_height="90dp"
+		    android:background="@drawable/shadow_gradient"
+		    android:layout_gravity="top"/>
+
+	    <View
+		    android:layout_width="match_parent"
+		    android:layout_height="?attr/actionBarSize"
+		    android:background="@drawable/shadow_normal_reserve"
+		    android:layout_gravity="bottom"/>
+
+	    <moe.feng.material.statusbar.AppBarLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:alpha="0"
+		    android:id="@+id/appbar_background"
+		    app:colorNormal="@color/toolbar_default_background_dark"
+		    app:colorDark="@color/toolbar_default_background_dark_darker"
+		    app:enableElevation="false"/>
+
+    </FrameLayout>
+
+	<moe.feng.material.statusbar.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:colorNormal="@android:color/transparent"
+		app:colorDark="@android:color/transparent"
+		app:enableElevation="false">
+
+		<android.support.v7.widget.Toolbar
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:background="@android:color/transparent"
+			android:id="@+id/toolbar"
+			app:theme="@style/ThemeOverlay.AppCompat"
+			app:popupTheme="@style/ThemeOverlay.AppCompat"/>
+
+	</moe.feng.material.statusbar.AppBarLayout>
+
+	<com.melnykov.fab.FloatingActionButton
+		android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:id="@+id/fab"
+	    android:layout_gravity="end"
+	    android:layout_marginTop="@dimen/appbar_parallax_max_height"
+		android:layout_marginRight="@dimen/floating_action_button_margin"
+		app:fab_colorNormal="@color/pink_500"
+		app:fab_colorPressed="@color/pink_300"/>
+
+</FrameLayout>

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import moe.feng.bilinyan.R;
+import moe.feng.material.statusbar.AppBarLayout;
 import moe.feng.material.statusbar.StatusBarHeaderView;
 
 public abstract class LazyFragment extends Fragment {
@@ -22,6 +23,7 @@ public abstract class LazyFragment extends Fragment {
 	private LayoutInflater inflater;
 
 	private StatusBarHeaderView mStatusBarHeaderView;
+	private AppBarLayout mAppBarLayout;
 
 	public abstract @LayoutRes int getLayoutResId();
 
@@ -32,6 +34,11 @@ public abstract class LazyFragment extends Fragment {
 		activity = getSupportActivity();
 		try {
 			mStatusBarHeaderView = $(R.id.status_bar_header_view);
+		} catch (Exception e) {
+
+		}
+		try {
+			mAppBarLayout = $(R.id.appbar_layout);
 		} catch (Exception e) {
 
 		}
@@ -46,6 +53,9 @@ public abstract class LazyFragment extends Fragment {
 		super.onResume();
 		if (mStatusBarHeaderView != null) {
 			mStatusBarHeaderView.invalidate();
+		}
+		if (mAppBarLayout != null) {
+			mAppBarLayout.invalidate();
 		}
 	}
 

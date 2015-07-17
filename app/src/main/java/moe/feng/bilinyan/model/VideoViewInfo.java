@@ -1,5 +1,7 @@
 package moe.feng.bilinyan.model;
 
+import com.google.gson.Gson;
+
 public class VideoViewInfo {
 
 	public int play; // 播放次数
@@ -20,5 +22,13 @@ public class VideoViewInfo {
 	public String offsite; // Flash 播放调用地址
 	public String create_at; // 视频创建日期
 	public boolean favorited; // 是否已收藏
+
+	public String toJsonString() {
+		return new Gson().toJson(this);
+	}
+
+	public static VideoViewInfo createFromJson(String jsonStr) {
+		return new Gson().fromJson(jsonStr, VideoViewInfo.class);
+	}
 
 }
