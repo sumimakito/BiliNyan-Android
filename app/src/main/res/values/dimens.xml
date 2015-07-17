@@ -16,6 +16,8 @@
 	<dimen name="card_corner_radius">2dp</dimen>
 	<dimen name="card_title_margin">10dp</dimen>
 
+	<dimen name="title_margin_small">8dp</dimen>
+
 	<dimen name="navigation_header_height">180dp</dimen>
 	<dimen name="navigation_avatar_size">64dp</dimen>
 	<dimen name="navigation_avatar_margin">16dp</dimen>

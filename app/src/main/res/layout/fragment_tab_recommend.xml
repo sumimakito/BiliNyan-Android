@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<moe.feng.bilinyan.view.ObservableScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:paddingTop="@dimen/appbar_parallax_max_height"
+	android:clipToPadding="false"
+	android:id="@+id/scrollable">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/home_tab_recommend_title"
+			android:padding="@dimen/activity_vertical_margin"
+			android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+		<!-- 啊 因为不解决 RecyclerView 在 ScrollView 中的滑动以及高度冲突问题 用了这个傻逼方法 -->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/stupid_grid"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="180dp"
+				android:orientation="horizontal"
+				android:baselineAligned="false">
+
+				<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/card_margin"
+					android:layout_weight="1"
+					android:id="@+id/card_frame_0"/>
+
+				<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/card_margin"
+					android:layout_weight="1"
+					android:id="@+id/card_frame_1"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="180dp"
+				android:orientation="horizontal"
+				android:baselineAligned="false">
+
+				<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/card_margin"
+					android:layout_weight="1"
+					android:id="@+id/card_frame_2"/>
+
+				<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/card_margin"
+					android:layout_weight="1"
+					android:id="@+id/card_frame_3"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="180dp"
+				android:orientation="horizontal"
+				android:baselineAligned="false">
+
+				<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/card_margin"
+					android:layout_weight="1"
+					android:id="@+id/card_frame_4"/>
+
+				<FrameLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="@dimen/card_margin"
+					android:layout_weight="1"
+					android:id="@+id/card_frame_5"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</moe.feng.bilinyan.view.ObservableScrollView>

@@ -19,8 +19,6 @@ public class RecommendRecyclerAdapter extends AbsRecyclerViewAdapter {
 
 	private RecommendList mList;
 
-	private static final int TYPE_HEADER = 0, TYPE_CONTENT = 1;
-
 	public RecommendRecyclerAdapter(RecyclerView recyclerView, RecommendList list) {
 		super(recyclerView);
 		this.mList = list;
@@ -30,14 +28,8 @@ public class RecommendRecyclerAdapter extends AbsRecyclerViewAdapter {
 	public ClickableViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		bindContext(parent.getContext());
 		View v = LayoutInflater.from(getContext())
-				.inflate(
-						viewType == TYPE_HEADER ?
-								R.layout.list_item_home_header :
-								R.layout.card_item_home_recommend,
-						parent,
-						false
-				);
-		return viewType == TYPE_HEADER ? new ClickableViewHolder(v) : new CardHolder(v);
+				.inflate(R.layout.card_item_home_recommend, parent, false);
+		return new CardHolder(v);
 	}
 
 	@Override
@@ -50,23 +42,17 @@ public class RecommendRecyclerAdapter extends AbsRecyclerViewAdapter {
 
 			Picasso.with(getContext())
 					.load(Uri.parse(getVideoItem(position).pic))
-					.centerInside()
 					.into(holder.mPreviewImage);
 		}
 	}
 
 	public VideoItemInfo getVideoItem(int pos) {
-		return mList.lists.get(pos - 1);
-	}
-
-	@Override
-	public int getItemViewType(int position) {
-		return position == 0 ? TYPE_HEADER : TYPE_CONTENT;
+		return mList.lists.get(pos);
 	}
 
 	@Override
 	public int getItemCount() {
-		return 1 + (mList != null ? mList.lists.size() : 0);
+		return mList != null ? mList.lists.size() : 0;
 	}
 
 	public class CardHolder extends ClickableViewHolder {

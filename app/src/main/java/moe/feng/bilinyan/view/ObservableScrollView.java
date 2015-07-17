@@ -1,12 +1,13 @@
 package moe.feng.bilinyan.view;
 
 import android.content.Context;
+import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.widget.ScrollView;
 
 import java.util.ArrayList;
 
-public class ObservableScrollView extends ScrollView {
+public class ObservableScrollView extends NestedScrollView {
 
 	private ArrayList<OnScrollChangeListener> listeners = new ArrayList<>();
 

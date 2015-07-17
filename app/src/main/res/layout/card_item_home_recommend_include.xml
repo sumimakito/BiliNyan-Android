@@ -7,9 +7,10 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="148dp"
+        android:layout_height="130dp"
+        android:layout_weight="1"
         android:id="@+id/video_preview"
-        android:scaleType="centerInside"
+        android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         tools:src="@mipmap/ic_launcher"/>
 

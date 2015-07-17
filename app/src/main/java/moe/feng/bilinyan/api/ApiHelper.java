@@ -23,6 +23,16 @@ public class ApiHelper {
 		return builder.toString();
 	}
 
+	public static String getVideoInfoUrl(String av, String page, boolean needFav) {
+		UrlBuilder builder = new UrlBuilder(API_HOST + "/" + ApiUrl.VIEW);
+
+		builder.addParams("id", av);
+		builder.addParams("page", page);
+		builder.addParams("fav", needFav ? "1" : "0");
+
+		return builder.toString();
+	}
+
 	private static class UrlBuilder {
 
 		String urlRoot;
@@ -68,6 +78,7 @@ public class ApiHelper {
 
 		static final String HTML5 = "/m/html5";
 		static final String RECOMMEND = "/recommend";
+		static final String VIEW = "/view";
 
 	}
 

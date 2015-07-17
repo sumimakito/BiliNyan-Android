@@ -10,6 +10,7 @@
                                     android:id="@+id/video_card"
                                     app:cardElevation="@dimen/card_elevation"
                                     app:cardCornerRadius="@dimen/card_corner_radius"
+                                    app:cardBackgroundColor="@color/card_view_background_dark"
                                     tools:minWidth="160dp">
 
     <include layout="@layout/card_item_home_recommend_include"/>

@@ -1,4 +1,4 @@
-package moe.feng.bilinyan.ui.adapter;
+package moe.feng.bilinyan.ui.adapter.pager;
 
 import android.app.Fragment;
 import android.app.FragmentManager;

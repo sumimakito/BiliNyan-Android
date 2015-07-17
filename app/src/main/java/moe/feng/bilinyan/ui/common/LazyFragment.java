@@ -13,12 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import moe.feng.bilinyan.R;
-import moe.feng.bilinyan.view.StatusBarHeaderView;
+import moe.feng.material.statusbar.StatusBarHeaderView;
 
 public abstract class LazyFragment extends Fragment {
 
 	private View parentView;
 	private AppCompatActivity activity;
+	private LayoutInflater inflater;
 
 	private StatusBarHeaderView mStatusBarHeaderView;
 
@@ -26,6 +27,7 @@ public abstract class LazyFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle state) {
+		this.inflater = inflater;
 		parentView = inflater.inflate(getLayoutResId(), container, false);
 		activity = getSupportActivity();
 		try {
@@ -71,6 +73,14 @@ public abstract class LazyFragment extends Fragment {
 		return this.activity == null ?
 				(getActivity() == null ? null : getActivity().getApplicationContext()) :
 				this.activity.getApplicationContext();
+	}
+
+	protected LayoutInflater getLayoutInflater() {
+		return inflater;
+	}
+
+	protected View getParentView() {
+		return parentView;
 	}
 
 	public <T extends View> T $(int id) {

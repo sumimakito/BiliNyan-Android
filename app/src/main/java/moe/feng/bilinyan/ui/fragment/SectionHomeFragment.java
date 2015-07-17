@@ -7,8 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import moe.feng.bilinyan.R;
-import moe.feng.bilinyan.ui.adapter.BannerPagerAdapter;
-import moe.feng.bilinyan.ui.adapter.HomePagerAdapter;
+import moe.feng.bilinyan.ui.adapter.pager.BannerPagerAdapter;
+import moe.feng.bilinyan.ui.adapter.pager.HomePagerAdapter;
 import moe.feng.bilinyan.ui.common.LazyFragment;
 import moe.feng.bilinyan.util.Utility;
 import moe.feng.bilinyan.view.CircleIndicator;
@@ -63,6 +63,7 @@ public class SectionHomeFragment extends LazyFragment {
 		mSlidingTab.setOnTabItemClickListener(new SlidingTabLayout.OnTabItemClickListener() {
 			@Override
 			public void onTabItemClick(int pos) {
+				if (pos != mTabPager.getCurrentItem()) return;
 				if (mHomeAdapter.getScrollY(pos) > minHeight) {
 					mHomeAdapter.scrollToMinimumY(pos);
 				} else {

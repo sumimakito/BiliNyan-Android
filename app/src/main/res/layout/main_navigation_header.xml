@@ -17,7 +17,7 @@
 		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
-		<moe.feng.bilinyan.view.StatusBarHeaderView
+		<moe.feng.material.statusbar.StatusBarHeaderView
 			android:layout_width="match_parent"
 			android:layout_height="0dp"/>
 
