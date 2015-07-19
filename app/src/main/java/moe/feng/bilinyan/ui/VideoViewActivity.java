@@ -14,9 +14,12 @@ import com.melnykov.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import moe.feng.bilinyan.R;
+import moe.feng.bilinyan.api.VideoApi;
+import moe.feng.bilinyan.model.BasicMessage;
 import moe.feng.bilinyan.model.VideoItemInfo;
 import moe.feng.bilinyan.model.VideoViewInfo;
 import moe.feng.bilinyan.ui.common.AbsActivity;
+import moe.feng.bilinyan.util.AsyncTask;
 import moe.feng.bilinyan.util.Utility;
 import moe.feng.bilinyan.view.ObservableScrollView;
 import moe.feng.material.statusbar.AppBarLayout;
@@ -70,6 +73,10 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 		mPreviewView = $(R.id.video_preview);
 		mFAB = $(R.id.fab);
 
+		if (Build.VERSION.SDK_INT >= 21) {
+			mAppBarContainer.setElevation(getResources().getDimension(R.dimen.toolbar_elevation));
+		}
+
 		mFAB.setTranslationY(-getResources().getDimension(R.dimen.floating_action_button_size_half));
 		mScrollView.addOnScrollChangeListener(this);
 	}
@@ -94,58 +101,90 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 
 		mFAB.setTranslationY(-getResources().getDimension(R.dimen.floating_action_button_size_half)-target);
 		if (alpha > 0.8f && !isPlayingFABAnimation) {
-			mFAB.animate().scaleX(0f).scaleY(0f)
-					.setInterpolator(new AccelerateInterpolator())
-					.setListener(new Animator.AnimatorListener() {
-						@Override
-						public void onAnimationStart(Animator animator) {
-							isPlayingFABAnimation = true;
-						}
-
-						@Override
-						public void onAnimationEnd(Animator animator) {
-							isPlayingFABAnimation = false;
-						}
-
-						@Override
-						public void onAnimationCancel(Animator animator) {
-							isPlayingFABAnimation = false;
-						}
-
-						@Override
-						public void onAnimationRepeat(Animator animator) {
-
-						}
-					})
-					.start();
+			hideFAB();
 		} else if (alpha < 0.65f && !isPlayingFABAnimation) {
-			mFAB.animate().scaleX(1f).scaleY(1f)
-					.setInterpolator(new OvershootInterpolator())
-					.setListener(new Animator.AnimatorListener() {
-						@Override
-						public void onAnimationStart(Animator animator) {
-							isPlayingFABAnimation = true;
-						}
-
-						@Override
-						public void onAnimationEnd(Animator animator) {
-							isPlayingFABAnimation = false;
-						}
-
-						@Override
-						public void onAnimationCancel(Animator animator) {
-							isPlayingFABAnimation = false;
-						}
-
-						@Override
-						public void onAnimationRepeat(Animator animator) {
-
-						}
-					})
-					.start();
+			showFAB();
 		}
 
 		mPreviewView.setTranslationY(target * 0.7f);
+	}
+
+	private void showFAB() {
+		mFAB.animate().scaleX(1f).scaleY(1f)
+				.setInterpolator(new OvershootInterpolator())
+				.setListener(new Animator.AnimatorListener() {
+					@Override
+					public void onAnimationStart(Animator animator) {
+						isPlayingFABAnimation = true;
+					}
+
+					@Override
+					public void onAnimationEnd(Animator animator) {
+						isPlayingFABAnimation = false;
+						if (mAppBarBackground.getAlpha() > 0.8f) {
+							hideFAB();
+						}
+					}
+
+					@Override
+					public void onAnimationCancel(Animator animator) {
+						isPlayingFABAnimation = false;
+					}
+
+					@Override
+					public void onAnimationRepeat(Animator animator) {
+
+					}
+				})
+				.start();
+	}
+
+	private void hideFAB() {
+		mFAB.animate().scaleX(0f).scaleY(0f)
+				.setInterpolator(new AccelerateInterpolator())
+				.setListener(new Animator.AnimatorListener() {
+					@Override
+					public void onAnimationStart(Animator animator) {
+						isPlayingFABAnimation = true;
+					}
+
+					@Override
+					public void onAnimationEnd(Animator animator) {
+						isPlayingFABAnimation = false;
+						if (mAppBarBackground.getAlpha() < 0.65f) {
+							showFAB();
+						}
+					}
+
+					@Override
+					public void onAnimationCancel(Animator animator) {
+						isPlayingFABAnimation = false;
+					}
+
+					@Override
+					public void onAnimationRepeat(Animator animator) {
+
+					}
+				})
+				.start();
+	}
+
+	public class ViewGetTask extends AsyncTask<Void, Void, BasicMessage<VideoViewInfo>> {
+
+		@Override
+		protected BasicMessage<VideoViewInfo> doInBackground(Void... params) {
+			return VideoApi.getVideoViewInfo(itemInfo.aid, 0, false);
+		}
+
+		@Override
+		protected void onPostExecute(BasicMessage<VideoViewInfo> msg) {
+			if (msg != null && msg.getCode() == BasicMessage.CODE_SUCCEED) {
+				viewInfo = msg.getObject();
+			} else {
+
+			}
+		}
+
 	}
 
 }

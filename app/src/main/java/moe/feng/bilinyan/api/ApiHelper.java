@@ -1,12 +1,28 @@
 package moe.feng.bilinyan.api;
 
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import moe.feng.bilinyan.model.BasicMessage;
+import moe.feng.bilinyan.util.UrlBuilder;
+
 public class ApiHelper {
+
+	private static Gson gson = new Gson();
+	private static OkHttpClient client = new OkHttpClient();
 
 	public static final String API_HOST = "http://api.bilibili.cn";
 	public static final String BILIBILI_SITE = "http://www.bilibili.com";
+
+	public static final String TAG = ApiHelper.class.getSimpleName();
 
 	public static String getHTML5Url(String aid) {
 		return new UrlBuilder(API_HOST + "/" + ApiUrl.HTML5).addParams("aid", aid).toString();
@@ -23,7 +39,7 @@ public class ApiHelper {
 		return builder.toString();
 	}
 
-	public static String getVideoInfoUrl(String av, String page, boolean needFav) {
+	public static String getVideoInfoUrl(int av, int page, boolean needFav) {
 		UrlBuilder builder = new UrlBuilder(API_HOST + "/" + ApiUrl.VIEW);
 
 		builder.addParams("id", av);
@@ -31,47 +47,6 @@ public class ApiHelper {
 		builder.addParams("fav", needFav ? "1" : "0");
 
 		return builder.toString();
-	}
-
-	private static class UrlBuilder {
-
-		String urlRoot;
-		ArrayList<HashMap<String, String>> params;
-
-		public UrlBuilder(String urlRoot) {
-			this.urlRoot = urlRoot;
-			this.params = new ArrayList<>();
-		}
-
-		public UrlBuilder addParams(String key, String value) {
-			HashMap<String, String> map = new HashMap<>();
-			map.put("key", key);
-			map.put("value", value);
-			this.params.add(map);
-			return this;
-		}
-
-		public UrlBuilder removeParams(String key) {
-			for (HashMap<String, String> map : params) {
-				if (map.get("key").equals(key)) {
-					params.remove(map);
-					return this;
-				}
-			}
-			return this;
-		}
-
-		public String toString() {
-			StringBuffer sb = new StringBuffer(urlRoot);
-			for (int i = 0; i < params.size(); i++) {
-				sb.append(i == 0 ? "?" : "&")
-						.append(params.get(i).get("key"))
-						.append("=")
-						.append(params.get(i).get("value"));
-			}
-			return sb.toString();
-		}
-
 	}
 
 	private static class ApiUrl {
@@ -85,6 +60,28 @@ public class ApiHelper {
 	static class RecommendOrder {
 		public static final String DEFAULT = "default", NEW = "new", REVIEW = "review",
 				HOT = "hot", DAMKU = "damku", COMMENT = "comment", PROMOTE = "promote";
+	}
+
+	public static <OBJ> BasicMessage<OBJ> getSimpleUrlResult(String url, Class<OBJ> obj) {
+		Log.i(TAG, url);
+
+		Request request = new Request.Builder().url(url).build();
+		Log.i(TAG, "Set up the request" + request.toString());
+
+		BasicMessage<OBJ> msg = new BasicMessage<>();
+		try {
+			Response response = client.newCall(request).execute();
+			Log.i(TAG, "Get response:" + response.code());
+			String result = response.body().string();
+			Log.i(TAG, result);
+			msg.setObject(gson.fromJson(result, obj));
+			msg.setCode(BasicMessage.CODE_SUCCEED);
+		} catch (IOException e) {
+			e.printStackTrace();
+			msg.setCode(BasicMessage.CODE_ERROR);
+		}
+
+		return msg;
 	}
 
 }
