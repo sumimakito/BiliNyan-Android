@@ -11,23 +11,116 @@
 		android:clipToPadding="false"
 		android:id="@+id/scroll_view">
 
-		<LinearLayout
+		<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
+			android:layout_height="match_parent">
 
-			<TextView
-				android:layout_width="wrap_content"
+			<moe.feng.bilinyan.view.CircleProgressView
+				android:layout_height="@dimen/circle_progress_view_default_size"
+			    android:layout_width="@dimen/circle_progress_view_default_size"
+				android:layout_gravity="center"
+				android:id="@+id/circle_progress"
+				app:matProg_barColor="?attr/colorPrimary"
+				app:matProg_barWidth="@dimen/circle_progress_view_default_border_width"/>
+
+			<LinearLayout
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:text="Test!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
-			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
-			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
-			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
-			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
-			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!
-			\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!\nTest!"/>
+				android:visibility="gone"
+				android:id="@+id/container_view"
+				android:paddingTop="@dimen/activity_vertical_margin"
+				android:paddingBottom="@dimen/activity_vertical_margin"
+				android:paddingStart="@dimen/activity_horizontal_margin"
+				android:paddingEnd="@dimen/activity_horizontal_margin"
+				android:orientation="vertical">
 
-		</LinearLayout>
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/tv_title"
+					android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+				<Space android:layout_width="match_parent" android:layout_height="8dp"/>
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical"
+					android:orientation="horizontal">
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<LinearLayout
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="center_vertical"
+							android:orientation="horizontal">
+
+							<ImageView
+								android:layout_width="@dimen/video_info_mini_icons_size"
+								android:layout_height="@dimen/video_info_mini_icons_size"
+								android:src="@drawable/ic_play_circle_outline_black_24dp"
+								android:tint="@android:color/white"
+								android:alpha="0.65"/>
+
+							<TextView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginStart="@dimen/video_info_count_text_margin_start"
+								android:id="@+id/tv_play_time"
+								android:textSize="@dimen/video_info_mini_icons_size"/>
+
+							<Space android:layout_width="16dp" android:layout_height="match_parent"/>
+
+							<ImageView
+								android:layout_width="@dimen/video_info_mini_icons_size"
+								android:layout_height="@dimen/video_info_mini_icons_size"
+								android:src="@drawable/ic_subtitles_black_24dp"
+								android:tint="@android:color/white"
+								android:alpha="0.65"/>
+
+							<TextView
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginStart="@dimen/video_info_count_text_margin_start"
+								android:id="@+id/tv_review_count"
+								android:textSize="@dimen/video_info_mini_icons_size"/>
+
+						</LinearLayout>
+
+						<Space android:layout_width="match_parent" android:layout_height="4dp"/>
+
+						<TextView
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:id="@+id/tv_created_at"/>
+
+					</LinearLayout>
+					
+					<Space android:layout_width="8dp" android:layout_height="wrap_content"/>
+
+					<moe.feng.bilinyan.view.UserTagView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:id="@+id/author_tag"/>
+
+				</LinearLayout>
+
+				<Space android:layout_width="match_parent" android:layout_height="8dp"/>
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:id="@+id/tv_description"
+					android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
+			</LinearLayout>
+
+		</FrameLayout>
 
 	</moe.feng.bilinyan.view.ObservableScrollView>
 
@@ -90,7 +183,8 @@
 	    android:layout_gravity="end"
 	    android:layout_marginTop="@dimen/appbar_parallax_max_height"
 		android:layout_marginRight="@dimen/floating_action_button_margin"
+		android:src="@drawable/ic_play_arrow_white_24dp"
 		app:fab_colorNormal="@color/pink_500"
-		app:fab_colorPressed="@color/pink_300"/>
+		app:fab_colorPressed="@color/pink_700"/>
 
 </FrameLayout>

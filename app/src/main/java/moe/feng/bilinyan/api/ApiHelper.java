@@ -8,8 +8,6 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import moe.feng.bilinyan.model.BasicMessage;
 import moe.feng.bilinyan.util.UrlBuilder;
@@ -29,7 +27,7 @@ public class ApiHelper {
 	}
 
 	public static String getRecommendUrl(String tid, String pagenum, String pagesize, String order) {
-		UrlBuilder builder = new UrlBuilder(API_HOST + "/" + ApiUrl.RECOMMEND);
+		UrlBuilder builder = new UrlBuilder(API_HOST +ApiUrl.RECOMMEND);
 
 		if (tid != null) builder.addParams("tid", tid);
 		if (pagenum != null) builder.addParams("page", pagenum);
@@ -40,13 +38,20 @@ public class ApiHelper {
 	}
 
 	public static String getVideoInfoUrl(int av, int page, boolean needFav) {
-		UrlBuilder builder = new UrlBuilder(API_HOST + "/" + ApiUrl.VIEW);
+		UrlBuilder builder = new UrlBuilder(API_HOST + ApiUrl.VIEW);
 
 		builder.addParams("id", av);
 		builder.addParams("page", page);
 		builder.addParams("fav", needFav ? "1" : "0");
+		addAPIParmasAndComplete(builder);
 
 		return builder.toString();
+	}
+
+	private static void addAPIParmasAndComplete(UrlBuilder builder) {
+		builder.addParams("appkey", Secret.APP_KEY);
+		builder.addParams("ts", Long.toString(System.currentTimeMillis() / 1000));
+		builder.addParams("sign", SecretHelper.produceMD5(builder, Secret.APP_SECRET));
 	}
 
 	private static class ApiUrl {

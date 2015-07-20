@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+			  android:gravity="center_vertical">
+
+    <moe.feng.bilinyan.view.CircleImageView
+	    android:layout_width="@dimen/user_avatar_size"
+	    android:layout_height="@dimen/user_avatar_size"
+	    android:layout_margin="@dimen/user_avatar_margin"
+	    android:id="@+id/user_avatar"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="@dimen/user_avatar_margin"
+		android:minWidth="@dimen/user_name_min_width"
+		android:id="@+id/user_name"/>
+
+</LinearLayout>

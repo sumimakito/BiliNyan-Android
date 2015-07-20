@@ -18,9 +18,11 @@ public class VideoViewInfo {
 	public String from; // 视频来源
 	public String author; // 投稿人
 	public int mid; // 投稿人ID
+	public String face; // 投稿人头像
 	public int cid; // 视频源及弹幕编号
 	public String offsite; // Flash 播放调用地址
-	public String create_at; // 视频创建日期
+	public int created; // 视频创建时间
+	public String created_at; // 视频创建日期
 	public boolean favorited; // 是否已收藏
 
 	public String toJsonString() {

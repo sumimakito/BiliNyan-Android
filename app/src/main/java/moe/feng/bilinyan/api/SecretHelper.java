@@ -21,7 +21,8 @@ public class SecretHelper {
 		byte[] bytes = digest.digest();
 		StringBuffer sb = new StringBuffer("");
 		for (byte bit : bytes) {
-			sb.append(Integer.toHexString(bit & 0xff));
+			int bt = bit & 0xff;
+			sb.append(bt < 16 ? "0" : "").append(Integer.toHexString(bt));
 		}
 		return sb.toString();
 	}

@@ -66,9 +66,10 @@ public class UrlBuilder {
 
 	public String toStringWithoutUrlRoot() {
 		StringBuffer sb = new StringBuffer("");
+		sortParams();
 		for (int i = 0; i < params.size(); i++) {
 			try {
-				sb.append(i == 0 ? "?" : "&")
+				sb.append(i == 0 ? "" : "&")
 						.append(params.get(i).get("key"))
 						.append("=")
 						.append(URLEncoder.encode(params.get(i).get("value"), "UTF-8"));
@@ -77,6 +78,18 @@ public class UrlBuilder {
 			}
 		}
 		return sb.toString();
+	}
+
+	private void sortParams() {
+		for (int i = 0; i < paramsSize() - 1; i++) {
+			for (int j = i + 1; j < paramsSize(); j++) {
+				if (params.get(i).get("key").compareTo(params.get(j).get("key")) > 0) {
+					HashMap<String, String> tempMap = params.get(i);
+					params.set(i, params.get(j));
+					params.set(j, tempMap);
+				}
+			}
+		}
 	}
 
 }

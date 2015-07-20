@@ -41,4 +41,8 @@
 		<item>@string/section_tv_series</item>
 	</string-array>
 
+	<!-- Video View Activity -->
+	<string name="info_play_times_format">%d</string>
+	<string name="info_reviews_format">%d</string>
+
 </resources>
