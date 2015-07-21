@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import moe.feng.material.statusbar.util.ViewHelper;
@@ -41,6 +42,10 @@ public class AppBarLayout extends LinearLayout {
 		}
 		enableMode = a.getInt(R.styleable.StatusBarHeaderView_enableMode, MODE_ALL);
 		headerView = new StatusBarHeaderView(context, colorNormal, colorDark, enableMode);
+
+		ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
+		headerView.setLayoutParams(lp);
+
 		this.setOrientation(LinearLayout.VERTICAL);
 		this.addView(headerView);
 		a.recycle();

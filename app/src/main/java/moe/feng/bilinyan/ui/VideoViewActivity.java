@@ -5,22 +5,27 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 import com.melnykov.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import moe.feng.bilinyan.R;
 import moe.feng.bilinyan.api.VideoApi;
 import moe.feng.bilinyan.model.BasicMessage;
 import moe.feng.bilinyan.model.VideoItemInfo;
 import moe.feng.bilinyan.model.VideoViewInfo;
+import moe.feng.bilinyan.ui.adapter.list.VideoPartListAdapter;
 import moe.feng.bilinyan.ui.common.AbsActivity;
 import moe.feng.bilinyan.util.AsyncTask;
 import moe.feng.bilinyan.util.Utility;
@@ -38,11 +43,13 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 	private FloatingActionButton mFAB;
 	private CircleProgressView mCircleProgress;
 	private LinearLayout mContainer;
-	private TextView mTitleText, mPlayTimeText, mReviewCountText, mDescText, mCreatedAtText;
+	private AppCompatTextView mTitleText, mPlayTimeText, mReviewCountText, mDescText, mCreatedAtText;
 	private UserTagView mAuthorTagView;
+	private ExpandableHeightListView mVideoPartList;
 
 	private VideoItemInfo itemInfo;
 	private VideoViewInfo viewInfo;
+	private ArrayList<VideoViewInfo> parts;
 
 	private boolean isPlayingFABAnimation = false;
 
@@ -91,6 +98,7 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 		mDescText = $(R.id.tv_description);
 		mCreatedAtText = $(R.id.tv_created_at);
 		mAuthorTagView = $(R.id.author_tag);
+		mVideoPartList = $(R.id.video_part_list);
 
 		mFAB.setTranslationY(-getResources().getDimension(R.dimen.floating_action_button_size_half));
 		mScrollView.addOnScrollChangeListener(this);
@@ -116,20 +124,33 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 		mCircleProgress.stopSpinning();
 		mContainer.setVisibility(View.VISIBLE);
 
+		// 加载分P，当页码只有一时直接获取当前信息
+		if (viewInfo.pages.equals("1")) {
+			parts = new ArrayList<>();
+			parts.add(viewInfo);
+			finishPartsGetTask();
+		} else {
+			new PartsGetTask().execute();
+		}
+
+		// 加载信息
 		mTitleText.setText(viewInfo.title);
 		mPlayTimeText.setText(String.format(getString(R.string.info_play_times_format), viewInfo.play));
 		mReviewCountText.setText(String.format(getString(R.string.info_reviews_format), viewInfo.review));
 		mDescText.setText(viewInfo.description);
 		mCreatedAtText.setText(viewInfo.created_at);
-		mAuthorTagView.setUserName(viewInfo.author);
-		mAuthorTagView.setOnClickListener(new View.OnClickListener() {
+		mAuthorTagView.setUpWithInfo(this, viewInfo.author, viewInfo.mid, viewInfo.face);
+	}
+
+	private void finishPartsGetTask() {
+		mVideoPartList.setAdapter(new VideoPartListAdapter(getApplicationContext(), parts));
+		mVideoPartList.setExpanded(true);
+		mVideoPartList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
-			public void onClick(View view) {
-				
+			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
 			}
 		});
-
-		Picasso.with(this).load(viewInfo.face).into(mAuthorTagView.getAvatarView());
 	}
 
 	@Override
@@ -227,6 +248,38 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 				finishGetTask();
 			} else {
 
+			}
+		}
+
+	}
+
+	public class PartsGetTask extends AsyncTask<Void, Void, BasicMessage> {
+
+		@Override
+		protected BasicMessage doInBackground(Void... params) {
+			BasicMessage msg = new BasicMessage();
+
+			parts = new ArrayList<>();
+			if (viewInfo != null) {
+				for (int i = 0; i < Integer.valueOf(viewInfo.pages); i++) {
+					BasicMessage<VideoViewInfo> b =
+							VideoApi.getVideoViewInfo(itemInfo.aid, i, false);
+					if (b != null && b.getCode() == BasicMessage.CODE_SUCCEED) {
+						parts.add(b.getObject());
+					}
+				}
+				msg.setCode(BasicMessage.CODE_SUCCEED);
+			} else {
+				msg.setCode(BasicMessage.CODE_ERROR);
+			}
+
+			return msg;
+		}
+
+		@Override
+		protected void onPostExecute(BasicMessage msg) {
+			if (msg.getCode() == BasicMessage.CODE_SUCCEED) {
+				finishPartsGetTask();
 			}
 		}
 

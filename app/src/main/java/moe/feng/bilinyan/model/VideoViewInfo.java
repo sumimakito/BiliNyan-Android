@@ -24,6 +24,7 @@ public class VideoViewInfo {
 	public int created; // 视频创建时间
 	public String created_at; // 视频创建日期
 	public boolean favorited; // 是否已收藏
+	public String partname; // 分区名称
 
 	public String toJsonString() {
 		return new Gson().toJson(this);

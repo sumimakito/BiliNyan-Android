@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+			  android:clickable="true"
+			  android:background="?attr/selectableItemBackground"
+			  android:paddingStart="@dimen/activity_horizontal_margin"
+			  android:paddingEnd="@dimen/activity_horizontal_margin">
+
+	<ImageView
+		android:layout_width="130dp"
+		android:layout_height="70dp"
+		android:layout_gravity="center_vertical"
+		android:layout_marginTop="@dimen/list_item_vertical_margin_small"
+		android:layout_marginBottom="@dimen/list_item_vertical_margin_small"
+		android:id="@+id/iv_preview"
+		android:scaleType="centerCrop"
+		tools:src="@drawable/test_banner_2"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/list_item_vertical_margin_small"
+		android:layout_marginBottom="@dimen/list_item_vertical_margin_small"
+		android:paddingStart="@dimen/activity_horizontal_margin"
+		android:paddingEnd="@dimen/activity_horizontal_margin"
+		android:orientation="vertical">
+
+		<android.support.v7.widget.AppCompatTextView
+			android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:id="@+id/tv_title"
+			android:layout_marginTop="@dimen/title_margin_small"
+			android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+			tools:text="Test Title! Poi!"/>
+
+		<Space android:layout_width="match_parent" android:layout_height="4dp"/>
+
+		<android.support.v7.widget.AppCompatTextView
+			android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+			android:id="@+id/tv_uper"
+			android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+			tools:text="UPer: Your daddy"/>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingTop="@dimen/activity_vertical_margin"
+			android:gravity="center_vertical"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:layout_width="@dimen/video_info_mini_icons_size"
+				android:layout_height="@dimen/video_info_mini_icons_size"
+				android:id="@+id/icon_number_0"
+				android:src="@drawable/ic_play_circle_outline_black_24dp"
+				android:tint="@android:color/white"
+				android:alpha="0.65"/>
+
+			<android.support.v7.widget.AppCompatTextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/video_info_count_text_margin_start"
+				android:id="@+id/tv_number_0"
+				android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+				tools:text="12450"/>
+
+			<Space android:layout_width="16dp" android:layout_height="match_parent"/>
+
+			<ImageView
+				android:layout_width="@dimen/video_info_mini_icons_size"
+				android:layout_height="@dimen/video_info_mini_icons_size"
+				android:id="@+id/icon_number_1"
+				android:src="@drawable/ic_subtitles_black_24dp"
+				android:tint="@android:color/white"
+				android:alpha="0.65"/>
+
+			<android.support.v7.widget.AppCompatTextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/video_info_count_text_margin_start"
+				android:id="@+id/tv_number_1"
+				android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+				tools:text="23333"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

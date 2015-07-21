@@ -4,20 +4,32 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import moe.feng.bilinyan.R;
+import moe.feng.bilinyan.ui.UserInfoActivity;
 
 public class UserTagView extends FrameLayout {
 
 	private CardView cardView;
 	private CircleImageView avatarView;
 	private TextView userNameText;
+
+	private OnClickListener onClickListener;
+
+	private AppCompatActivity activity;
+	private String name;
+	private int mid = -1;
+	private String avatarUrl;
 
 	public UserTagView(Context context) {
 		this(context, null);
@@ -38,6 +50,17 @@ public class UserTagView extends FrameLayout {
 				getResources().getDimensionPixelSize(R.dimen.user_tag_view_height)
 		);
 		this.addView(cardView, lp);
+
+		cardView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (mid != -1 && activity != null) {
+					UserInfoActivity.launch(activity, name, mid, avatarUrl);
+				} else if (onClickListener != null) {
+					onClickListener.onClick(view);
+				}
+			}
+		});
 	}
 
 	public void setAvatar(Bitmap bitmap) {
@@ -62,6 +85,21 @@ public class UserTagView extends FrameLayout {
 
 	public TextView getUserNameText() {
 		return this.userNameText;
+	}
+
+	public void setUpWithInfo(AppCompatActivity activity, String name, int mid, String avatarUrl) {
+		this.activity = activity;
+		this.name = name;
+		this.mid = mid;
+		this.avatarUrl = avatarUrl;
+		this.setUserName(name);
+
+		Picasso.with(getContext()).load(this.avatarUrl).into(avatarView);
+	}
+
+	@Override
+	public void setOnClickListener(OnClickListener listener) {
+		this.onClickListener = listener;
 	}
 
 }

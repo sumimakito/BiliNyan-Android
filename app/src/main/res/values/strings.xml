@@ -44,5 +44,21 @@
 	<!-- Video View Activity -->
 	<string name="info_play_times_format">%d</string>
 	<string name="info_reviews_format">%d</string>
+	<string name="header_title_description">Description</string>
+	<string name="header_title_video_part">Video parts</string>
+
+	<!-- User Info Activity -->
+	<string name="title_user_info">User information</string>
+	<string name="type_no_watching_unknown">Watch it</string>
+	<string name="type_no_watching_male">Watch him</string>
+	<string name="type_no_watching_female">Watch her</string>
+	<string name="type_watching">Watching</string>
+	<string name="type_following_you">Following you</string>
+	<string name="type_friend">Friend</string>
+	<string name="info_following_format">Following %d</string>
+	<string name="info_fans_format">Fans %d</string>
+
+	<!-- Video Item Info -->
+	<string name="item_info_uper_format">Author: %s</string>
 
 </resources>

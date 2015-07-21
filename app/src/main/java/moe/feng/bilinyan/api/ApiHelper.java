@@ -19,6 +19,7 @@ public class ApiHelper {
 
 	public static final String API_HOST = "http://api.bilibili.cn";
 	public static final String BILIBILI_SITE = "http://www.bilibili.com";
+	public static final String HDSLB_HOST = "http://i2.hdslb.com";
 
 	public static final String TAG = ApiHelper.class.getSimpleName();
 
@@ -27,7 +28,7 @@ public class ApiHelper {
 	}
 
 	public static String getRecommendUrl(String tid, String pagenum, String pagesize, String order) {
-		UrlBuilder builder = new UrlBuilder(API_HOST +ApiUrl.RECOMMEND);
+		UrlBuilder builder = new UrlBuilder(API_HOST + "/" + ApiUrl.RECOMMEND);
 
 		if (tid != null) builder.addParams("tid", tid);
 		if (pagenum != null) builder.addParams("page", pagenum);
@@ -38,11 +39,31 @@ public class ApiHelper {
 	}
 
 	public static String getVideoInfoUrl(int av, int page, boolean needFav) {
-		UrlBuilder builder = new UrlBuilder(API_HOST + ApiUrl.VIEW);
+		UrlBuilder builder = new UrlBuilder(API_HOST + "/" + ApiUrl.VIEW);
 
 		builder.addParams("id", av);
 		builder.addParams("page", page);
 		builder.addParams("fav", needFav ? "1" : "0");
+		addAPIParmasAndComplete(builder);
+
+		return builder.toString();
+	}
+
+	public static String getUserInfoUrl(String user) {
+		UrlBuilder builder = new UrlBuilder(API_HOST + "/" + ApiUrl.USERINFO);
+		return builder.addParams("user", user).toString();
+	}
+
+	public static String getUserInfoUrl(int uid) {
+		UrlBuilder builder = new UrlBuilder(API_HOST + "/" + ApiUrl.USERINFO);
+		return builder.addParams("uid", uid).toString();
+	}
+
+	public static String getUserVideoListUrl(int mid, int page) {
+		UrlBuilder builder = new UrlBuilder(API_HOST + "/" + ApiUrl.LIST);
+
+		builder.addParams("mid", mid);
+		builder.addParams("page", page);
 		addAPIParmasAndComplete(builder);
 
 		return builder.toString();
@@ -56,9 +77,11 @@ public class ApiHelper {
 
 	private static class ApiUrl {
 
-		static final String HTML5 = "/m/html5";
-		static final String RECOMMEND = "/recommend";
-		static final String VIEW = "/view";
+		static final String HTML5 = "m/html5";
+		static final String RECOMMEND = "recommend";
+		static final String VIEW = "view";
+		static final String USERINFO = "userinfo";
+		static final String LIST = "list";
 
 	}
 

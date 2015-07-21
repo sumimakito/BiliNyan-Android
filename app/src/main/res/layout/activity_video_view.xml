@@ -4,6 +4,41 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/appbar_parallax_max_height"
+		android:background="@color/toolbar_default_background_dark"
+		android:id="@+id/appbar_container">
+
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/video_preview"
+			android:scaleType="centerCrop"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="90dp"
+			android:background="@drawable/shadow_gradient"
+			android:layout_gravity="top"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:background="@drawable/shadow_normal_reserve"
+			android:layout_gravity="bottom"/>
+
+		<moe.feng.material.statusbar.AppBarLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:alpha="0"
+			android:id="@+id/appbar_background"
+			app:colorNormal="@color/toolbar_default_background_dark"
+			app:colorDark="@color/toolbar_default_background_dark_darker"
+			app:enableElevation="false"/>
+
+	</FrameLayout>
+
 	<moe.feng.bilinyan.view.ObservableScrollView
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
@@ -19,6 +54,7 @@
 				android:layout_height="@dimen/circle_progress_view_default_size"
 			    android:layout_width="@dimen/circle_progress_view_default_size"
 				android:layout_gravity="center"
+				android:paddingTop="80dp"
 				android:id="@+id/circle_progress"
 				app:matProg_barColor="?attr/colorPrimary"
 				app:matProg_barWidth="@dimen/circle_progress_view_default_border_width"/>
@@ -34,7 +70,7 @@
 				android:paddingEnd="@dimen/activity_horizontal_margin"
 				android:orientation="vertical">
 
-				<TextView
+				<android.support.v7.widget.AppCompatTextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:id="@+id/tv_title"
@@ -67,7 +103,7 @@
 								android:tint="@android:color/white"
 								android:alpha="0.65"/>
 
-							<TextView
+							<android.support.v7.widget.AppCompatTextView
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:layout_marginStart="@dimen/video_info_count_text_margin_start"
@@ -83,7 +119,7 @@
 								android:tint="@android:color/white"
 								android:alpha="0.65"/>
 
-							<TextView
+							<android.support.v7.widget.AppCompatTextView
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:layout_marginStart="@dimen/video_info_count_text_margin_start"
@@ -94,7 +130,7 @@
 
 						<Space android:layout_width="match_parent" android:layout_height="4dp"/>
 
-						<TextView
+						<android.support.v7.widget.AppCompatTextView
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:id="@+id/tv_created_at"/>
@@ -112,52 +148,46 @@
 
 				<Space android:layout_width="match_parent" android:layout_height="8dp"/>
 
-				<TextView
+				<android.support.v7.widget.AppCompatTextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+					android:paddingStart="@dimen/title_margin_small"
+					android:paddingEnd="@dimen/title_margin_small"
+					android:textColor="?attr/colorPrimary"
+					android:text="@string/header_title_description"/>
+
+				<Space android:layout_width="match_parent" android:layout_height="4dp"/>
+
+				<android.support.v7.widget.AppCompatTextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:id="@+id/tv_description"
 					android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
+				<Space android:layout_width="match_parent" android:layout_height="16dp"/>
+
+				<android.support.v7.widget.AppCompatTextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+					android:paddingStart="@dimen/title_margin_small"
+					android:paddingEnd="@dimen/title_margin_small"
+					android:textColor="?attr/colorPrimary"
+					android:text="@string/header_title_video_part"/>
+
+				<Space android:layout_width="match_parent" android:layout_height="4dp"/>
+
+				<com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
+					android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:id="@+id/video_part_list"/>
 
 			</LinearLayout>
 
 		</FrameLayout>
 
 	</moe.feng.bilinyan.view.ObservableScrollView>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/appbar_parallax_max_height"
-        android:background="@color/toolbar_default_background_dark"
-	    android:id="@+id/appbar_container">
-
-	    <ImageView
-		    android:layout_width="match_parent"
-		    android:layout_height="match_parent"
-		    android:id="@+id/video_preview"
-		    android:scaleType="centerCrop"/>
-
-	    <View
-		    android:layout_width="match_parent"
-		    android:layout_height="90dp"
-		    android:background="@drawable/shadow_gradient"
-		    android:layout_gravity="top"/>
-
-	    <View
-		    android:layout_width="match_parent"
-		    android:layout_height="?attr/actionBarSize"
-		    android:background="@drawable/shadow_normal_reserve"
-		    android:layout_gravity="bottom"/>
-
-	    <moe.feng.material.statusbar.AppBarLayout
-		    android:layout_width="match_parent"
-		    android:layout_height="match_parent"
-		    android:alpha="0"
-		    android:id="@+id/appbar_background"
-		    app:colorNormal="@color/toolbar_default_background_dark"
-		    app:colorDark="@color/toolbar_default_background_dark_darker"
-		    app:enableElevation="false"/>
-
-    </FrameLayout>
 
 	<moe.feng.material.statusbar.AppBarLayout
 		android:layout_width="match_parent"
@@ -182,7 +212,7 @@
 	    android:id="@+id/fab"
 	    android:layout_gravity="end"
 	    android:layout_marginTop="@dimen/appbar_parallax_max_height"
-		android:layout_marginRight="@dimen/floating_action_button_margin"
+		android:layout_marginEnd="@dimen/floating_action_button_margin"
 		android:src="@drawable/ic_play_arrow_white_24dp"
 		app:fab_colorNormal="@color/pink_500"
 		app:fab_colorPressed="@color/pink_700"/>

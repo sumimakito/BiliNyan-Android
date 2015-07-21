@@ -15,6 +15,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginEnd="@dimen/user_avatar_margin"
+		android:gravity="center_horizontal"
 		android:minWidth="@dimen/user_name_min_width"
 		android:id="@+id/user_name"/>
 

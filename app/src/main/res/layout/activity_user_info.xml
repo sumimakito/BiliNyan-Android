@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <moe.feng.material.statusbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appbar_layout"
+	    app:colorNormal="@color/pink_500"
+	    app:colorDark="@color/pink_700"
+	    app:enableElevation="true">
+
+        <android.support.v7.widget.Toolbar
+	        android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+	        android:background="@android:color/transparent"
+            android:id="@+id/toolbar"
+	        app:theme="@style/ThemeOverlay.AppCompat"
+	        app:popupTheme="@style/ThemeOverlay.AppCompat"/>
+
+	    <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:gravity="center_vertical"
+		    android:orientation="horizontal">
+
+		    <moe.feng.bilinyan.view.CircleImageView
+			    android:layout_width="@dimen/user_info_avatar_size"
+			    android:layout_height="@dimen/user_info_avatar_size"
+			    android:layout_margin="@dimen/user_info_avatar_padding"
+			    android:id="@+id/user_avatar_view"
+			    app:border_width="1dp"
+			    app:border_color="@android:color/white"
+			    tools:src="@drawable/avatar_placeholder_empty"/>
+
+		    <LinearLayout
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:padding="@dimen/user_info_details_layout_padding"
+			    android:orientation="vertical"
+			    android:gravity="center_vertical">
+
+			    <android.support.v7.widget.AppCompatTextView
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:paddingStart="@dimen/title_margin_small"
+				    android:paddingEnd="@dimen/title_margin_small"
+				    android:id="@+id/user_name"
+				    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+				    android:singleLine="true"
+				    tools:text="Misaka Mikoto"/>
+
+			    <Space android:layout_width="match_parent" android:layout_height="4dp"/>
+
+			    <android.support.v7.widget.AppCompatTextView
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:paddingStart="@dimen/title_margin_small"
+				    android:paddingEnd="@dimen/title_margin_small"
+				    android:id="@+id/user_desc"
+				    tools:text="Bilibilibilibilibilibili~"/>
+			    
+			    <LinearLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="@dimen/user_info_details_number_bar_height"
+				    android:id="@+id/number_bar"
+				    android:visibility="gone"
+				    android:orientation="horizontal">
+
+				    <android.support.v7.widget.AppCompatTextView
+					    android:layout_width="match_parent"
+				        android:layout_height="match_parent"
+					    android:layout_weight="1"
+				        android:paddingStart="@dimen/user_info_details_number_padding"
+				        android:paddingEnd="@dimen/user_info_details_number_padding"
+					    android:gravity="center"
+				        android:id="@+id/tv_follow_users"
+				        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+				        android:clickable="true"
+				        android:background="?attr/selectableItemBackground"
+					    tools:text="Follow 12450"/>
+
+				    <View
+					    android:layout_width="@dimen/user_info_details_number_divider_size"
+					    android:layout_height="match_parent"
+				        android:layout_marginTop="@dimen/user_info_details_number_divider_margin"
+				        android:layout_marginBottom="@dimen/user_info_details_number_divider_margin"
+					    android:background="@android:color/black"
+					    android:alpha="0.3"/>
+
+				    <android.support.v7.widget.AppCompatTextView
+					    android:layout_width="match_parent"
+					    android:layout_height="match_parent"
+					    android:layout_weight="1"
+					    android:paddingStart="@dimen/user_info_details_number_padding"
+					    android:paddingEnd="@dimen/user_info_details_number_padding"
+					    android:gravity="center"
+					    android:id="@+id/tv_fans"
+					    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+					    android:clickable="true"
+					    android:background="?attr/selectableItemBackground"
+					    tools:text="Fans 233"/>
+
+			    </LinearLayout>
+
+		    </LinearLayout>
+
+	    </LinearLayout>
+
+    </moe.feng.material.statusbar.AppBarLayout>
+
+	<android.support.v4.widget.SwipeRefreshLayout
+		android:layout_height="match_parent"
+	    android:layout_width="match_parent"
+	    android:id="@+id/refresh_layout">
+
+		<android.support.v7.widget.RecyclerView
+			android:layout_height="match_parent"
+			android:layout_width="match_parent"
+			android:id="@+id/user_video_list"/>
+
+	</android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

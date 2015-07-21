@@ -31,6 +31,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.UserInfoActivity"
+            android:label="@string/title_user_info" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

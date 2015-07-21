@@ -34,6 +34,9 @@
 
 	<dimen name="title_margin_small">8dp</dimen>
 
+	<!-- List -->
+	<dimen name="list_item_vertical_margin_small">8dp</dimen>
+
 	<!-- Navigation -->
 	<dimen name="navigation_header_height">180dp</dimen>
 	<dimen name="navigation_avatar_size">64dp</dimen>
@@ -58,5 +61,14 @@
 	<!-- activity_video_view.xml -->
 	<dimen name="video_info_mini_icons_size">16dp</dimen>
 	<dimen name="video_info_count_text_margin_start">4dp</dimen>
+
+	<!-- activity_user_info.xml -->
+	<dimen name="user_info_avatar_size">64dp</dimen>
+	<dimen name="user_info_avatar_padding">24dp</dimen>
+	<dimen name="user_info_details_layout_padding">12dp</dimen>
+	<dimen name="user_info_details_number_divider_size">1dp</dimen>
+	<dimen name="user_info_details_number_divider_margin">10dp</dimen>
+	<dimen name="user_info_details_number_bar_height">48dp</dimen>
+	<dimen name="user_info_details_number_padding">12dp</dimen>
 
 </resources>
