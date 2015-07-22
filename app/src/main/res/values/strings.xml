@@ -61,4 +61,9 @@
 	<!-- Video Item Info -->
 	<string name="item_info_uper_format">Author: %s</string>
 
+	<!-- User List Activity -->
+	<string name="title_user_list">User list</string>
+	<string name="title_user_list_following">Following users</string>
+	<string name="title_user_list_fans">Fans list</string>
+
 </resources>

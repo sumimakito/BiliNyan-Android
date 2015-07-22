@@ -1,14 +1,13 @@
 package moe.feng.bilinyan.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class UserInfo {
 
 	public int mid; // 用户ID
-	@SerializedName("uname")
 	public String name; // 用户名
+	public String uname; // 查询 UID 返回的用户名
+	public String userid; // 查询 UID 返回的真实用户名
 	public boolean approve; // 是否为认证用户
 	public String sex; // 性别
 	public int rank; // 用户等级数

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+			  android:clickable="true"
+			  android:background="?attr/selectableItemBackground"
+			  android:paddingStart="@dimen/activity_horizontal_margin"
+			  android:paddingEnd="@dimen/activity_horizontal_margin">
+
+	<moe.feng.bilinyan.view.CircleImageView
+		android:layout_width="@dimen/list_item_avatar_size"
+		android:layout_height="@dimen/list_item_avatar_size"
+		android:layout_marginTop="@dimen/list_item_vertical_margin_small"
+		android:layout_marginBottom="@dimen/list_item_vertical_margin_small"
+		android:id="@+id/user_avatar_view"
+		tools:src="@drawable/avatar_placeholder_empty"/>
+
+	<android.support.v7.widget.AppCompatTextView
+		android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+		android:paddingStart="@dimen/activity_horizontal_margin"
+		android:paddingEnd="@dimen/activity_horizontal_margin"
+	    android:id="@+id/user_name"
+		android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+		android:textSize="@dimen/list_item_user_name_size"
+		tools:text="Test"/>
+
+</LinearLayout>

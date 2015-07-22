@@ -93,7 +93,7 @@ public class UserInfoActivity extends AbsActivity {
 		mFollowNumText.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-
+				UserListActivity.launch(UserInfoActivity.this, new ArrayList<>(userInfo.attentions));
 			}
 		});
 		mFansNumText.setOnClickListener(new View.OnClickListener() {
@@ -176,7 +176,7 @@ public class UserInfoActivity extends AbsActivity {
 
 		@Override
 		protected BasicMessage<UserInfo> doInBackground(Void... params) {
-			return UserInfoApi.getUserInfoById(mid);
+			return UserInfoApi.getUserInfoByName(name);
 		}
 
 		@Override
@@ -206,7 +206,6 @@ public class UserInfoActivity extends AbsActivity {
 			if (msg != null) {
 				if (msg.getCode() == BasicMessage.CODE_SUCCEED) {
 					userVideos = msg.getObject();
-					Log.i("task", "succeed");
 					list.addAll(userVideos.lists);
 					mAdapter.notifyDataSetChanged();
 				} else {

@@ -39,6 +39,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.UserListActivity"
+            android:label="@string/title_user_list">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
