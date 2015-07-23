@@ -16,17 +16,6 @@
 	<string name="item_settings">Settings</string>
 
 	<!-- Home -->
-	<string name="section_recommend">Recommend</string>
-	<string name="section_anime">Anime</string>
-	<string name="section_cartoon">Cartoon</string>
-	<string name="section_music">Music</string>
-	<string name="section_dance">Dance</string>
-	<string name="section_game">Game</string>
-	<string name="section_technology">Technology</string>
-	<string name="section_entertainment">Entertainment</string>
-	<string name="section_funny">Funny</string>
-	<string name="section_movie">Movies</string>
-	<string name="section_tv_series">TV series</string>
 	<string-array name="sections">
 		<item>@string/section_recommend</item>
 		<item>@string/section_anime</item>

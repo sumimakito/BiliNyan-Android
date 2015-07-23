@@ -71,6 +71,14 @@ public class ApiHelper {
 		return builder.toString();
 	}
 
+	public static String getIndexUrl() {
+		UrlBuilder builder = new UrlBuilder(API_HOST + "/" + ApiUrl.INDEX);
+
+		builder.addParams("platform", "android");
+
+		return builder.toString();
+	}
+
 	private static void addAPIParmasAndComplete(UrlBuilder builder) {
 		builder.addParams("appkey", Secret.APP_KEY);
 		builder.addParams("ts", Long.toString(System.currentTimeMillis() / 1000));
@@ -84,6 +92,7 @@ public class ApiHelper {
 		static final String VIEW = "view";
 		static final String USERINFO = "userinfo";
 		static final String LIST = "list";
+		static final String INDEX = "index";
 
 	}
 

@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import moe.feng.bilinyan.R;
 import moe.feng.bilinyan.model.RecommendList;
 import moe.feng.bilinyan.model.VideoItemInfo;
@@ -17,9 +19,9 @@ import moe.feng.bilinyan.ui.common.AbsRecyclerViewAdapter;
 
 public class RecommendRecyclerAdapter extends AbsRecyclerViewAdapter {
 
-	private RecommendList mList;
+	private ArrayList<VideoItemInfo> mList;
 
-	public RecommendRecyclerAdapter(RecyclerView recyclerView, RecommendList list) {
+	public RecommendRecyclerAdapter(RecyclerView recyclerView, ArrayList<VideoItemInfo> list) {
 		super(recyclerView);
 		this.mList = list;
 	}
@@ -47,12 +49,12 @@ public class RecommendRecyclerAdapter extends AbsRecyclerViewAdapter {
 	}
 
 	public VideoItemInfo getVideoItem(int pos) {
-		return mList.lists.get(pos);
+		return mList.get(pos);
 	}
 
 	@Override
 	public int getItemCount() {
-		return mList != null ? mList.lists.size() : 0;
+		return mList != null ? mList.size() : 0;
 	}
 
 	public class CardHolder extends ClickableViewHolder {

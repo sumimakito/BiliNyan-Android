@@ -9,10 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.google.gson.Gson;
+
 import moe.feng.bilinyan.R;
+import moe.feng.bilinyan.api.IndexApi;
+import moe.feng.bilinyan.model.BasicMessage;
+import moe.feng.bilinyan.model.Index;
 import moe.feng.bilinyan.ui.adapter.pager.BannerPagerAdapter;
 import moe.feng.bilinyan.ui.adapter.pager.HomePagerAdapter;
 import moe.feng.bilinyan.ui.common.LazyFragment;
+import moe.feng.bilinyan.util.AsyncTask;
 import moe.feng.bilinyan.util.Utility;
 import moe.feng.bilinyan.view.CircleIndicator;
 import moe.feng.bilinyan.view.SlidingTabLayout;
@@ -30,6 +36,8 @@ public class SectionHomeFragment extends LazyFragment {
 	private ScrollableLayout mScrollableLayout;
 
 	private View mAppBarLayout, mAppBarBackground;
+
+	private Index mIndexData;
 
 	private int APP_BAR_HEIGHT, TOOLBAR_HEIGHT, TAB_HEIGHT, STATUS_BAR_HEIGHT = 0;
 
@@ -96,10 +104,34 @@ public class SectionHomeFragment extends LazyFragment {
 				mBannerAdapter.setBannerImageTransitionY(tabsTransitionY * 0.7f);
 
 				float alpha = ((float) y) / (float) maxY;
-				Log.i("scroll", "alpha:" + alpha);
 				mAppBarBackground.setAlpha(alpha);
 			}
 		});
+
+		new IndexGetApi().execute();
+	}
+
+	public Index getIndexData() {
+		return this.mIndexData;
+	}
+
+	private class IndexGetApi extends AsyncTask<Void, Void, BasicMessage<Index>> {
+
+		@Override
+		protected BasicMessage<Index> doInBackground(Void... params) {
+			return IndexApi.getIndex();
+		}
+
+		@Override
+		protected void onPostExecute(BasicMessage<Index> msg) {
+			if (msg != null && msg.getCode() == BasicMessage.CODE_SUCCEED) {
+				mIndexData = msg.getObject();
+				mHomeAdapter.notifyIndexDataUpdateAll(mIndexData);
+			} else {
+
+			}
+		}
+
 	}
 
 }

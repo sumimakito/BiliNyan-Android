@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.ScrollView;
 
 import moe.feng.bilinyan.R;
+import moe.feng.bilinyan.model.Index;
 
 @SuppressLint("ValidFragment")
 public class PlaceholderFragment extends BaseHomeFragment {
@@ -35,6 +36,11 @@ public class PlaceholderFragment extends BaseHomeFragment {
 	@Override
 	public boolean canScrollVertically(int direction) {
 		return mScrollView != null && mScrollView.canScrollVertically(direction);
+	}
+
+	@Override
+	public void notifyIndexDataUpdate(Index data) {
+
 	}
 
 }

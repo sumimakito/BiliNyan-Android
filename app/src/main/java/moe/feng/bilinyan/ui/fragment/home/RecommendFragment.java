@@ -17,6 +17,7 @@ import java.util.List;
 import moe.feng.bilinyan.R;
 import moe.feng.bilinyan.api.RecommendApi;
 import moe.feng.bilinyan.model.BasicMessage;
+import moe.feng.bilinyan.model.Index;
 import moe.feng.bilinyan.model.RecommendList;
 import moe.feng.bilinyan.model.VideoItemInfo;
 import moe.feng.bilinyan.ui.VideoViewActivity;
@@ -64,10 +65,18 @@ public class RecommendFragment extends BaseHomeFragment {
 		return mScrollView != null && mScrollView.canScrollVertically(direction);
 	}
 
+	@Override
+	public void notifyIndexDataUpdate(Index data) {
+
+	}
+
 	private class GetRecommendTask extends AsyncTask<Void, Void, BasicMessage<RecommendList>> {
 
 		@Override
 		protected BasicMessage<RecommendList> doInBackground(Void... params) {
+			for (int i = 0; i < 100; i++) {
+
+			}
 			return RecommendApi.getList("20", null, "6", RecommendApi.ORDER_NONE);
 		}
 
