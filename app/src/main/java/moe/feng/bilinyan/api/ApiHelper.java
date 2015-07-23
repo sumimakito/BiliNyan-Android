@@ -85,6 +85,16 @@ public class ApiHelper {
 		return BILIBILI_SITE + "/" + ApiUrl.SLIDESHOW;
 	}
 
+	public static String getBangumiUrl(int btype, int weekday) {
+		UrlBuilder builder = new UrlBuilder(API_HOST + "/" + ApiUrl.BANGUMI);
+
+		if (btype != -1) builder.addParams("btype", btype);
+		if (weekday != -1) builder.addParams("weekday", weekday);
+		addAPIParmasAndComplete(builder);
+
+		return builder.toString();
+	}
+
 	private static void addAPIParmasAndComplete(UrlBuilder builder) {
 		builder.addParams("appkey", Secret.APP_KEY);
 		builder.addParams("ts", Long.toString(System.currentTimeMillis() / 1000));
@@ -99,6 +109,7 @@ public class ApiHelper {
 		static final String USERINFO = "userinfo";
 		static final String LIST = "list";
 		static final String INDEX = "index";
+		static final String BANGUMI = "bangumi";
 
 		static final String SLIDESHOW = "index/slideshow.json";
 
