@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import moe.feng.bilinyan.R;
-import moe.feng.bilinyan.api.UserInfoApi;
+import moe.feng.bilinyan.api.UrlHelper;
 import moe.feng.bilinyan.model.UserInfo;
 import moe.feng.bilinyan.ui.common.AbsRecyclerViewAdapter;
 
@@ -48,7 +48,7 @@ public class UserItemRecyclerAdapter extends AbsRecyclerViewAdapter {
 			);
 
 			Picasso.with(getContext())
-					.load(UserInfoApi.getFaceUrl(items.get(pos)))
+					.load(UrlHelper.getFaceUrl(items.get(pos)))
 					.placeholder(R.drawable.avatar_placeholder_empty)
 					.into(holder.mAvatarImage);
 		}

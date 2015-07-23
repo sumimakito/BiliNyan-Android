@@ -32,12 +32,21 @@
 			android:layout_gravity="bottom"
 			android:background="@drawable/shadow_gradient_reserve"/>
 
+		<moe.feng.bilinyan.view.CircleProgressView
+			android:layout_width="@dimen/circle_progress_view_default_size"
+			android:layout_height="@dimen/circle_progress_view_default_size"
+			android:id="@+id/banner_loading_circle"
+			android:layout_gravity="center"
+			app:matProg_barColor="?attr/colorPrimary"
+			app:matProg_barWidth="@dimen/circle_progress_view_default_border_width"/>
+
 		<moe.feng.bilinyan.view.CircleIndicator
 			android:layout_width="wrap_content"
 			android:layout_height="@dimen/circle_indicator_default_height"
 			android:layout_gravity="bottom"
 			android:layout_marginStart="64dp"
 			android:layout_marginBottom="@dimen/appbar_tab_height"
+			android:visibility="invisible"
 			android:id="@+id/pager_indicator"/>
 
 		<moe.feng.material.statusbar.AppBarLayout

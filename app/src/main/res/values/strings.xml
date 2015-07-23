@@ -2,7 +2,9 @@
 
 	<string name="app_name">BiliNyan</string>
 
+	<!-- Common Resources -->
 	<string name="action_settings">Settings</string>
+	<string name="snackbar_try_again">Try again</string>
 
 	<!-- Navigation Items -->
 	<string name="item_home">Home</string>
@@ -30,6 +32,8 @@
 		<item>@string/section_tv_series</item>
 	</string-array>
 
+	<string name="tips_cannot_get_banner">Failed to get banner.</string>
+
 	<!-- Video View Activity -->
 	<string name="info_play_times_format">%d</string>
 	<string name="info_reviews_format">%d</string>
@@ -54,5 +58,15 @@
 	<string name="title_user_list">User list</string>
 	<string name="title_user_list_following">Following users</string>
 	<string name="title_user_list_fans">Fans list</string>
+
+	<!-- Simple Browser Activity -->
+	<string name="title_browser">Browse page</string>
+	<string name="action_reload">Reload</string>
+	<string name="action_forward">Forward</string>
+	<string name="action_open_outside">Open with browser</string>
+	<string name="action_copy_link">Copy link</string>
+	<string name="action_share">Share....</string>
+
+	<string name="tips_copy_link_okay">Link has been copied to clipboard.</string>
 
 </resources>

@@ -22,6 +22,8 @@ public class ApiHelper {
 	public static final String HDSLB_HOST = "http://i2.hdslb.com";
 
 	public static final String COMMON_UA_STR = "BiliNyan Android Client/0.1 (fython@163.com)";
+	public static final String COMPUTER_UA = "Mozilla/5.0 (Windows NT 6.1)" +
+			" AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.89 Safari/537.36";
 
 	public static final String TAG = ApiHelper.class.getSimpleName();
 
@@ -79,6 +81,10 @@ public class ApiHelper {
 		return builder.toString();
 	}
 
+	public static String getSlideshowUrl() {
+		return BILIBILI_SITE + "/" + ApiUrl.SLIDESHOW;
+	}
+
 	private static void addAPIParmasAndComplete(UrlBuilder builder) {
 		builder.addParams("appkey", Secret.APP_KEY);
 		builder.addParams("ts", Long.toString(System.currentTimeMillis() / 1000));
@@ -93,6 +99,8 @@ public class ApiHelper {
 		static final String USERINFO = "userinfo";
 		static final String LIST = "list";
 		static final String INDEX = "index";
+
+		static final String SLIDESHOW = "index/slideshow.json";
 
 	}
 

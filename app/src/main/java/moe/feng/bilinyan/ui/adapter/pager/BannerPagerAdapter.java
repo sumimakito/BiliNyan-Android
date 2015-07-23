@@ -4,30 +4,33 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+
+import moe.feng.bilinyan.model.HomeBanner;
 import moe.feng.bilinyan.ui.fragment.HomeBannerFragment;
 
 public class BannerPagerAdapter extends FragmentPagerAdapter {
 
-	private int count;
 	private HomeBannerFragment[] fragments;
+	private ArrayList<HomeBanner> items;
 
-	public BannerPagerAdapter(FragmentManager fm, int count) {
+	public BannerPagerAdapter(FragmentManager fm, ArrayList<HomeBanner> items) {
 		super(fm);
-		this.count = count;
-		fragments = new HomeBannerFragment[count];
+		fragments = new HomeBannerFragment[items.size()];
+		this.items = items;
 	}
 
 	@Override
 	public Fragment getItem(int position) {
 		if (fragments[position] == null) {
-			fragments[position] = HomeBannerFragment.newInstance(position);
+			fragments[position] = HomeBannerFragment.newInstance(items.get(position));
 		}
 		return fragments[position];
 	}
 
 	@Override
 	public int getCount() {
-		return count;
+		return items.size();
 	}
 
 	public void setBannerImageTransitionY(float y) {

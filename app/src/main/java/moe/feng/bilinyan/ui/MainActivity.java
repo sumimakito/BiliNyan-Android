@@ -34,7 +34,7 @@ public class MainActivity extends AbsActivity implements NavigationView.OnNaviga
 
 		fragments = new Fragment[]{
 				new SectionHomeFragment(),
-				new SectionHomeFragment(),
+				new SectionDiscoverFragment(),
 				new SectionDiscoverFragment(),
 				new SectionDiscoverFragment()
 		};

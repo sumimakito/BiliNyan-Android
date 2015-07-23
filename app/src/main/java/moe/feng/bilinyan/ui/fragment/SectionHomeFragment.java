@@ -4,16 +4,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.google.gson.Gson;
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.listeners.ActionClickListener;
+
+import java.util.ArrayList;
 
 import moe.feng.bilinyan.R;
+import moe.feng.bilinyan.api.BannerApi;
 import moe.feng.bilinyan.api.IndexApi;
 import moe.feng.bilinyan.model.BasicMessage;
+import moe.feng.bilinyan.model.HomeBanner;
 import moe.feng.bilinyan.model.Index;
 import moe.feng.bilinyan.ui.adapter.pager.BannerPagerAdapter;
 import moe.feng.bilinyan.ui.adapter.pager.HomePagerAdapter;
@@ -21,6 +25,7 @@ import moe.feng.bilinyan.ui.common.LazyFragment;
 import moe.feng.bilinyan.util.AsyncTask;
 import moe.feng.bilinyan.util.Utility;
 import moe.feng.bilinyan.view.CircleIndicator;
+import moe.feng.bilinyan.view.CircleProgressView;
 import moe.feng.bilinyan.view.SlidingTabLayout;
 import ru.noties.scrollable.CanScrollVerticallyDelegate;
 import ru.noties.scrollable.OnScrollChangedListener;
@@ -34,6 +39,7 @@ public class SectionHomeFragment extends LazyFragment {
 	private CircleIndicator mBannerIndicator;
 	private SlidingTabLayout mSlidingTab;
 	private ScrollableLayout mScrollableLayout;
+	private CircleProgressView mBannerLoadingView;
 
 	private View mAppBarLayout, mAppBarBackground;
 
@@ -62,12 +68,11 @@ public class SectionHomeFragment extends LazyFragment {
 		mAppBarLayout = $(R.id.appbar_layout);
 		mAppBarBackground = $(R.id.appbar_background);
 		mScrollableLayout = $(R.id.scrollable);
+		mBannerLoadingView = $(R.id.banner_loading_circle);
 
 		ViewCompat.setElevation(mAppBarLayout, getResources().getDimensionPixelSize(R.dimen.toolbar_elevation));
 
-		mBannerAdapter = new BannerPagerAdapter(getChildFragmentManager(), 3);
-		mBannerPager.setAdapter(mBannerAdapter);
-		mBannerIndicator.setViewPager(mBannerPager);
+		mBannerLoadingView.spin();
 
 		mHomeAdapter = new HomePagerAdapter(getChildFragmentManager(), getApplicationContext());
 		mTabPager.setAdapter(mHomeAdapter);
@@ -101,21 +106,59 @@ public class SectionHomeFragment extends LazyFragment {
 			public void onScrollChanged(int y, int oldY, int maxY) {
 				float tabsTransitionY = y < maxY ? 0 : y - maxY;
 				mSlidingTab.setTranslationY(tabsTransitionY);
-				mBannerAdapter.setBannerImageTransitionY(tabsTransitionY * 0.7f);
+				if (mBannerAdapter != null) {
+					mBannerAdapter.setBannerImageTransitionY(tabsTransitionY * 0.7f);
+				}
 
 				float alpha = ((float) y) / (float) maxY;
 				mAppBarBackground.setAlpha(alpha);
 			}
 		});
 
-		new IndexGetApi().execute();
+		new IndexGetTask().execute();
+		new BannerGetTask().execute();
 	}
 
 	public Index getIndexData() {
 		return this.mIndexData;
 	}
 
-	private class IndexGetApi extends AsyncTask<Void, Void, BasicMessage<Index>> {
+	private class BannerGetTask extends AsyncTask<Void, Void, BasicMessage<ArrayList<HomeBanner>>> {
+
+		@Override
+		protected BasicMessage<ArrayList<HomeBanner>> doInBackground(Void... params) {
+			return BannerApi.getBanner();
+		}
+
+		@Override
+		protected void onPostExecute(BasicMessage<ArrayList<HomeBanner>> msg) {
+			mBannerLoadingView.stopSpinning();
+			mBannerLoadingView.setVisibility(View.INVISIBLE);
+			if (msg != null && msg.getCode() == BasicMessage.CODE_SUCCEED) {
+				mBannerIndicator.setVisibility(View.VISIBLE);
+
+				mBannerAdapter = new BannerPagerAdapter(getChildFragmentManager(), msg.getObject());
+				mBannerPager.setAdapter(mBannerAdapter);
+				mBannerIndicator.setViewPager(mBannerPager);
+			} else {
+				Snackbar.with(getApplicationContext())
+						.text(R.string.tips_cannot_get_banner)
+						.actionLabel(R.string.snackbar_try_again)
+						.actionColorResource(R.color.pink_800)
+						.actionListener(new ActionClickListener() {
+							@Override
+							public void onActionClicked(Snackbar snackbar) {
+								new BannerGetTask().execute();
+								snackbar.dismiss();
+							}
+						})
+						.show(getSupportActivity());
+			}
+		}
+
+	}
+
+	private class IndexGetTask extends AsyncTask<Void, Void, BasicMessage<Index>> {
 
 		@Override
 		protected BasicMessage<Index> doInBackground(Void... params) {

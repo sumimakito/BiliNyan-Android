@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import moe.feng.bilinyan.R;
+import moe.feng.bilinyan.api.UrlHelper;
 import moe.feng.bilinyan.api.UserInfoApi;
 import moe.feng.bilinyan.model.BasicMessage;
 import moe.feng.bilinyan.model.List;
@@ -128,7 +128,7 @@ public class UserInfoActivity extends AbsActivity {
 		mFollowNumText.setText(String.format(getString(R.string.info_following_format), userInfo.attention));
 		mFansNumText.setText(String.format(getString(R.string.info_fans_format), userInfo.fans));
 
-		Picasso.with(this).load(UserInfoApi.getFaceUrl(userInfo))
+		Picasso.with(this).load(UrlHelper.getFaceUrl(userInfo))
 				.placeholder(R.drawable.avatar_placeholder_empty)
 				.into(mAvatarImage);
 

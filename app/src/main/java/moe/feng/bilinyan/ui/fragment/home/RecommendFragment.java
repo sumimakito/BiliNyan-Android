@@ -74,10 +74,7 @@ public class RecommendFragment extends BaseHomeFragment {
 
 		@Override
 		protected BasicMessage<RecommendList> doInBackground(Void... params) {
-			for (int i = 0; i < 100; i++) {
-
-			}
-			return RecommendApi.getList("20", null, "6", RecommendApi.ORDER_NONE);
+			return RecommendApi.getList(null, null, "6", RecommendApi.ORDER_HOT);
 		}
 
 		@Override

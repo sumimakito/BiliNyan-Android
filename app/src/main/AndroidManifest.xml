@@ -47,6 +47,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.common.BrowserActivity"
+            android:label="@string/title_browser">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

@@ -59,15 +59,4 @@ public class UserInfoApi {
 		return msg;
 	}
 
-	public static String getFaceUrl(UserInfo info) {
-		if (info.face.contains(".hdslb.com")) {
-			return info.face;
-		}
-		String face = ApiHelper.HDSLB_HOST + info.face;
-		if (face.contains("{SIZE}")) {
-			face = face.replace("{SIZE}", "");
-		}
-		return face;
-	}
-
 }

@@ -21,6 +21,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import moe.feng.bilinyan.R;
+import moe.feng.bilinyan.api.UrlHelper;
 import moe.feng.bilinyan.api.VideoApi;
 import moe.feng.bilinyan.model.BasicMessage;
 import moe.feng.bilinyan.model.VideoItemInfo;
@@ -47,6 +48,7 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 	private UserTagView mAuthorTagView;
 	private ExpandableHeightListView mVideoPartList;
 
+	private int av;
 	private VideoItemInfo itemInfo;
 	private VideoViewInfo viewInfo;
 	private ArrayList<VideoViewInfo> parts;
@@ -55,7 +57,7 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 
 	private int APP_BAR_HEIGHT, TOOLBAR_HEIGHT, STATUS_BAR_HEIGHT = 0, minHeight = 0;
 
-	private static String EXTRA_ITEM_INFO = "extra_item_info";
+	private static String EXTRA_ITEM_INFO = "extra_item_info", EXTRA_AV = "extra_av";
 
 	public static String TAG = VideoViewActivity.class.getSimpleName();
 
@@ -71,11 +73,17 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 		minHeight = APP_BAR_HEIGHT - TOOLBAR_HEIGHT - STATUS_BAR_HEIGHT;
 
 		Intent intent = getIntent();
-		itemInfo = VideoItemInfo.createFromJson(intent.getStringExtra(EXTRA_ITEM_INFO));
+		if (intent.hasExtra(EXTRA_ITEM_INFO)) {
+			itemInfo = VideoItemInfo.createFromJson(intent.getStringExtra(EXTRA_ITEM_INFO));
+		} else if (intent.hasExtra(EXTRA_AV)) {
+			av = intent.getIntExtra(EXTRA_AV, -1);
+		}
 
 		setContentView(R.layout.activity_video_view);
 
-		Picasso.with(this).load(itemInfo.pic).into(mPreviewView);
+		if (itemInfo != null) {
+			Picasso.with(this).load(UrlHelper.getClearVideoPreviewUrl(itemInfo.pic)).into(mPreviewView);
+		}
 
 		startGetTask();
 	}
@@ -111,6 +119,13 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 		activity.startActivity(intent);
 	}
 
+	public static void launch(AppCompatActivity activity, int aid) {
+		Intent intent = new Intent(activity, VideoViewActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.putExtra(EXTRA_AV, aid);
+		activity.startActivity(intent);
+	}
+
 	private void startGetTask() {
 		mCircleProgress.setVisibility(View.VISIBLE);
 		mCircleProgress.spin();
@@ -131,6 +146,11 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 			finishPartsGetTask();
 		} else {
 			new PartsGetTask().execute();
+		}
+
+		// 当没有传入 VideoItemInfo 时需要加载出信息后再读取图片
+		if (itemInfo == null) {
+			Picasso.with(this).load(UrlHelper.getClearVideoPreviewUrl(viewInfo.pic)).into(mPreviewView);
 		}
 
 		// 加载信息
@@ -238,7 +258,7 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 
 		@Override
 		protected BasicMessage<VideoViewInfo> doInBackground(Void... params) {
-			return VideoApi.getVideoViewInfo(itemInfo.aid, 0, false);
+			return VideoApi.getVideoViewInfo(itemInfo != null ? itemInfo.aid : av, 0, false);
 		}
 
 		@Override
@@ -262,8 +282,11 @@ public class VideoViewActivity extends AbsActivity implements ObservableScrollVi
 			parts = new ArrayList<>();
 			if (viewInfo != null) {
 				for (int i = 0; i < Integer.valueOf(viewInfo.pages); i++) {
-					BasicMessage<VideoViewInfo> b =
-							VideoApi.getVideoViewInfo(itemInfo.aid, i, false);
+					BasicMessage<VideoViewInfo> b = VideoApi.getVideoViewInfo(
+							itemInfo != null ? itemInfo.aid : av,
+							i,
+							false
+					);
 					if (b != null && b.getCode() == BasicMessage.CODE_SUCCEED) {
 						parts.add(b.getObject());
 					}
