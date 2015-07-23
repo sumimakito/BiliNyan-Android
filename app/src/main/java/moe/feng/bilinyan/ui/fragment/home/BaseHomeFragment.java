@@ -6,4 +6,6 @@ public abstract class BaseHomeFragment extends LazyFragment {
 
 	public abstract void scrollToTop();
 
+	public abstract boolean canScrollVertically(int direction);
+
 }

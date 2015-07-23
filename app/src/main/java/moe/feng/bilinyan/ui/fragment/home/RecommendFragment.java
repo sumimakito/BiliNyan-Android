@@ -59,6 +59,11 @@ public class RecommendFragment extends BaseHomeFragment {
 		mScrollView.smoothScrollTo(mScrollView.getScrollX(), 0);
 	}
 
+	@Override
+	public boolean canScrollVertically(int direction) {
+		return mScrollView != null && mScrollView.canScrollVertically(direction);
+	}
+
 	private class GetRecommendTask extends AsyncTask<Void, Void, BasicMessage<RecommendList>> {
 
 		@Override

@@ -51,4 +51,8 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
 		}
 	}
 
+	public boolean canScrollVertically(int position, int direction) {
+		return fragments[position] != null && fragments[position].canScrollVertically(direction);
+	}
+
 }

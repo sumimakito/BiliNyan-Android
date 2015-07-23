@@ -68,7 +68,7 @@
 	<!-- activity_user_info.xml -->
 	<dimen name="user_info_avatar_size">64dp</dimen>
 	<dimen name="user_info_avatar_padding">24dp</dimen>
-	<dimen name="user_info_details_layout_padding">12dp</dimen>
+	<dimen name="user_info_details_layout_horizontal_padding">12dp</dimen>
 	<dimen name="user_info_details_number_divider_size">1dp</dimen>
 	<dimen name="user_info_details_number_divider_margin">10dp</dimen>
 	<dimen name="user_info_details_number_bar_height">48dp</dimen>

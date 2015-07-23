@@ -37,7 +37,10 @@ public class UserInfoApi {
 	public static BasicMessage<List> getUserVideoList(int uid, int page) {
 		String url = ApiHelper.getUserVideoListUrl(uid, page);
 
-		Request request = new Request.Builder().url(url).build();
+		Request request = new Request.Builder()
+				.url(url)
+				.header("User-Agent", ApiHelper.COMMON_UA_STR)
+				.build();
 		Log.i(TAG, "Set up the request" + request.toString());
 
 		BasicMessage<List> msg = new BasicMessage<>();

@@ -21,6 +21,8 @@ public class ApiHelper {
 	public static final String BILIBILI_SITE = "http://www.bilibili.com";
 	public static final String HDSLB_HOST = "http://i2.hdslb.com";
 
+	public static final String COMMON_UA_STR = "BiliNyan Android Client/0.1 (fython@163.com)";
+
 	public static final String TAG = ApiHelper.class.getSimpleName();
 
 	public static String getHTML5Url(String aid) {
@@ -93,7 +95,10 @@ public class ApiHelper {
 	public static <OBJ> BasicMessage<OBJ> getSimpleUrlResult(String url, Class<OBJ> obj) {
 		Log.i(TAG, url);
 
-		Request request = new Request.Builder().url(url).build();
+		Request request = new Request.Builder()
+				.url(url)
+				.header("User-Agent", COMMON_UA_STR)
+				.build();
 		Log.i(TAG, "Set up the request" + request.toString());
 
 		BasicMessage<OBJ> msg = new BasicMessage<>();

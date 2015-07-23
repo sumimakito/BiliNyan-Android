@@ -32,4 +32,9 @@ public class PlaceholderFragment extends BaseHomeFragment {
 		mScrollView.smoothScrollTo(mScrollView.getScrollX(), 0);
 	}
 
+	@Override
+	public boolean canScrollVertically(int direction) {
+		return mScrollView != null && mScrollView.canScrollVertically(direction);
+	}
+
 }
