@@ -72,8 +72,6 @@ public class SectionHomeFragment extends LazyFragment {
 
 		ViewCompat.setElevation(mAppBarLayout, getResources().getDimensionPixelSize(R.dimen.toolbar_elevation));
 
-		mBannerLoadingView.spin();
-
 		mHomeAdapter = new HomePagerAdapter(getChildFragmentManager(), getApplicationContext());
 		mTabPager.setAdapter(mHomeAdapter);
 		mSlidingTab.setViewPager(mTabPager);
@@ -116,6 +114,12 @@ public class SectionHomeFragment extends LazyFragment {
 		});
 
 		new IndexGetTask().execute();
+		startBannerGetTask();
+	}
+
+	private void startBannerGetTask() {
+		mBannerLoadingView.setVisibility(View.VISIBLE);
+		mBannerLoadingView.spin();
 		new BannerGetTask().execute();
 	}
 
@@ -144,11 +148,11 @@ public class SectionHomeFragment extends LazyFragment {
 				Snackbar.with(getApplicationContext())
 						.text(R.string.tips_cannot_get_banner)
 						.actionLabel(R.string.snackbar_try_again)
-						.actionColorResource(R.color.pink_800)
+						.actionColorResource(R.color.pink_500)
 						.actionListener(new ActionClickListener() {
 							@Override
 							public void onActionClicked(Snackbar snackbar) {
-								new BannerGetTask().execute();
+								startBannerGetTask();
 								snackbar.dismiss();
 							}
 						})

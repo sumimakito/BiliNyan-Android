@@ -63,7 +63,7 @@ public class BrowserActivity extends AbsActivity {
 
 			@Override
 			public void onPageStarted(WebView view, String url, Bitmap bitmap) {
-				mActionBar.setTitle(url);
+				mActionBar.setTitle(url.equals(defaultUrl) ? title : url);
 			}
 
 			@Override
@@ -119,9 +119,9 @@ public class BrowserActivity extends AbsActivity {
 		} else if (id == R.id.action_share) {
 			Intent intent = new Intent();
 			intent.setAction(Intent.ACTION_SEND);
-			intent.putExtra(Intent.EXTRA_SUBJECT, mWebView.getTitle());
-			intent.putExtra(Intent.EXTRA_TEXT, mWebView.getUrl());
-			startActivity(intent);
+			intent.putExtra(Intent.EXTRA_TEXT, mWebView.getTitle() + " " + mWebView.getUrl());
+			intent.setType("text/plain");
+			startActivity(Intent.createChooser(intent, mActionBar.getTitle()));
 			return true;
 		} else if (id == android.R.id.home) {
 			super.onBackPressed();
